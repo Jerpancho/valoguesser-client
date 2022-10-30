@@ -4,19 +4,19 @@ import { MapContainer, ImageOverlay } from 'react-leaflet';
 import leaflet from 'leaflet';
 import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
-
-function Map() {
+import PropTypes from 'prop-types';
+// pass in a setter for the coords or dispatch that will send the coordinates back
+function Map({ setCoords }) {
 	// bounds is the bottom left to top right points of the map container
 	const mapRef = useRef();
 	const bounds = [
 		[0, 0],
 		[500, 500],
 	];
-	console.log('render');
 	return (
 		<MapContainer
 			id='map-container'
-			ref={mapRef}
+			ref={(ref) => (mapRef.current = ref)}
 			maxBounds={bounds}
 			bounds={bounds}
 			center={[250, 250]}
@@ -29,9 +29,14 @@ function Map() {
 				bounds={bounds}
 			/>
 
-			<MapEvents num={10} />
+			{/* use component to manipulate map state */}
+			<MapEvents setCoords={setCoords} />
 		</MapContainer>
 	);
 }
+
+Map.propTypes = {
+	setCoords: PropTypes.func.isRequired,
+};
 
 export default Map;
