@@ -6,7 +6,7 @@ import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
 import PropTypes from 'prop-types';
 // pass in a setter for the coords or dispatch that will send the coordinates back
-function Map({ setCoords }) {
+function Map({ dispatch }) {
 	// bounds is the bottom left to top right points of the map container
 	const mapRef = useRef();
 	const bounds = [
@@ -30,13 +30,13 @@ function Map({ setCoords }) {
 			/>
 
 			{/* use component to manipulate map state */}
-			<MapEvents setCoords={setCoords} />
+			<MapEvents dispatch={dispatch} />
 		</MapContainer>
 	);
 }
 
 Map.propTypes = {
-	setCoords: PropTypes.func.isRequired,
+	dispatch: PropTypes.func,
 };
 
 export default Map;

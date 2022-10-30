@@ -1,16 +1,16 @@
 import { useMapEvents } from 'react-leaflet';
-import { handleCoords } from '../utils/handleCoords';
 import PropTypes from 'prop-types';
-function MapEvents({ setCoords }) {
+function MapEvents({ dispatch }) {
 	useMapEvents({
 		click: (e) => {
-			handleCoords(e, setCoords);
+			dispatch({ type: 'UPDATE_COORDS', coords: e.latlng });
 		},
+		// mouseover or mousemove for changing size of the map
 	});
 	return null;
 }
 MapEvents.propTypes = {
-	setCoords: PropTypes.func.isRequired,
+	dispatch: PropTypes.func.isRequired,
 };
 
 export default MapEvents;
