@@ -6,7 +6,7 @@ import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
 import PropTypes from 'prop-types';
 // pass in a setter for the coords or dispatch that will send the coordinates back
-function Map({ dispatch }) {
+function Map({ dispatch, mapData }) {
 	// bounds is the bottom left to top right points of the map container
 	const mapRef = useRef();
 	const bounds = [
@@ -24,10 +24,7 @@ function Map({ dispatch }) {
 			zoomControl={false}
 			whenReady={() => setMapResize(mapRef)}
 		>
-			<ImageOverlay
-				url='https://res.cloudinary.com/dna7c2j1e/image/upload/v1666997700/maps/ofti7d61rniagjsmbehc.png'
-				bounds={bounds}
-			/>
+			<ImageOverlay url={mapData.base_img} bounds={bounds} />
 
 			{/* use component to manipulate map state */}
 			<MapEvents dispatch={dispatch} />
@@ -37,6 +34,7 @@ function Map({ dispatch }) {
 
 Map.propTypes = {
 	dispatch: PropTypes.func,
+	mapData: PropTypes.object,
 };
 
 export default Map;
