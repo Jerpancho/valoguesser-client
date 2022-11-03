@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, ImageOverlay } from 'react-leaflet';
+import { MapContainer, ImageOverlay, Marker } from 'react-leaflet';
 import leaflet from 'leaflet';
 import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
 import PropTypes from 'prop-types';
 // pass in a setter for the coords or dispatch that will send the coordinates back
-function Map({ dispatch, mapData }) {
+function Map({ dispatch, mapData, gameState }) {
 	// bounds is the bottom left to top right points of the map container
 	const mapRef = useRef();
 	const bounds = [
@@ -25,6 +25,11 @@ function Map({ dispatch, mapData }) {
 			whenReady={() => setMapResize(mapRef)}
 		>
 			<ImageOverlay url={mapData.base_img} bounds={bounds} />
+			{gameState.mapClicked === true && (
+				<Marker
+					position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
+				/>
+			)}
 
 			{/* use component to manipulate map state */}
 			<MapEvents dispatch={dispatch} />
@@ -35,6 +40,7 @@ function Map({ dispatch, mapData }) {
 Map.propTypes = {
 	dispatch: PropTypes.func,
 	mapData: PropTypes.object,
+	gameState: PropTypes.object,
 };
 
 export default Map;
