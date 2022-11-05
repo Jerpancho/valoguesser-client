@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import Map from '../components/map';
 import { reducer } from '../utils/reducer';
+import { useLocation } from 'react-router-dom';
 
 const defaultState = {
 	roundNumber: 0,
@@ -12,10 +13,12 @@ const defaultState = {
 
 const Game = () => {
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
+	// gets the map data in state
+	const { state } = useLocation();
 
 	return (
 		<div className='game'>
-			<Map dispatch={dispatch} />
+			<Map dispatch={dispatch} mapData={state} gameState={gameState} />
 			<p>
 				chosen coords:
 				<span>
