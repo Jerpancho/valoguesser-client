@@ -5,6 +5,7 @@ import Home from './routes/Home';
 import CreateMap from './routes/CreateMapForm';
 import CreateRound from './routes/CreateRoundForm';
 import Error from './routes/Error';
+import Test from './routes/Test';
 import './css/App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
 				<Route path='map/create' element={<CreateMap />} />
 				<Route path='round/create' element={<CreateRound />} />
 				<Route path='*' element={<Error />} />
+				<Route path='test' element={<Test />} />
 				{/* for testing only */}
 			</Routes>
 		</BrowserRouter>
