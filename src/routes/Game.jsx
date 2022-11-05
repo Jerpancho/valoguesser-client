@@ -19,12 +19,6 @@ const Game = () => {
 	return (
 		<div className='game'>
 			<Map dispatch={dispatch} mapData={state} gameState={gameState} />
-			<p>
-				chosen coords:
-				<span>
-					{gameState.coords.lat},{gameState.coords.lng}
-				</span>
-			</p>
 		</div>
 	);
 };
