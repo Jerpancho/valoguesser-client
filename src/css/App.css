@@ -1,12 +1,16 @@
+
 body {
 	color: white;
 	background: rgb(44, 38, 38);
 }
 
-#map-container {
-	background-color: #0a2256;
+.left-panel {
 	margin-left: 3rem;
 	margin-top: 3rem;
+}
+
+#map-container {
+	background-color: #0a2256;
 	width: 250px;
 	height: 250px;
 	transition: all 250ms ease;
