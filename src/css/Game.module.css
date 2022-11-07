@@ -1,0 +1,15 @@
+.game {
+	display: flex;
+}
+
+.rightPanel {
+	display: grid;
+	width: 100%;
+	height: 100vh;
+	place-items: center;
+	border: 2px solid black;
+}
+
+.leftPanel {
+	margin: 3rem 3rem 0 3rem;
+}

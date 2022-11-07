@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, ImageOverlay, Marker } from 'react-leaflet';
+import { MapContainer, ImageOverlay, Marker, LayerGroup, Polyline } from 'react-leaflet';
 import leaflet from 'leaflet';
 import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
@@ -43,13 +43,23 @@ function Map({ dispatch, mapData, gameState, rounds }) {
 				/>
 			)}
 			{gameState.roundConfirmed && (
-				<Marker
-					icon={answerIcon}
-					position={[
-						rounds[gameState.roundNumber].y_coord,
-						rounds[gameState.roundNumber].x_coord,
-					]}
-				/>
+				// can convert to component
+				<LayerGroup>
+					<Marker
+						icon={answerIcon}
+						position={[
+							rounds[gameState.roundNumber].y_coord,
+							rounds[gameState.roundNumber].x_coord,
+						]}
+					/>
+					<Polyline
+						pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+						positions={[
+							[gameState.coords.lat, gameState.coords.lng],
+							[rounds[gameState.roundNumber].y_coord, rounds[gameState.roundNumber].x_coord],
+						]}
+					></Polyline>
+				</LayerGroup>
 			)}
 
 			{/* use component to manipulate map state */}

@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react';
+import styles from '../css/Game.module.css';
 import Map from '../components/map';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
@@ -33,14 +34,17 @@ const Game = () => {
 					return val;
 				});
 		},
-		{ refetchOnWindowFocus: false }
+		{ refetchOnWindowFocus: false, cacheTime: 0 }
 	);
-
+	console.log(data);
+	// TODO: prioritize refining the game mechanic
 	function handleRoundButton() {
-		if (!gameState.roundConfirmed) {
-			dispatch({ type: 'CONFIRM_ROUND' });
-		} else {
-			dispatch({ type: 'NEXT_ROUND' });
+		if (gameState.mapClicked) {
+			if (!gameState.roundConfirmed) {
+				dispatch({ type: 'CONFIRM_ROUND' });
+			} else {
+				dispatch({ type: 'NEXT_ROUND' });
+			}
 		}
 	}
 
@@ -54,11 +58,12 @@ const Game = () => {
 		return (
 			<>
 				{gameState.gameOver ? (
+					// convert to a gameover component
 					<div> Game Over</div>
 				) : (
-					<div className='game'>
+					<div className={styles.game}>
 						{/* should add a condition for gameover */}
-						<div className='left-panel'>
+						<div className={styles.leftPanel}>
 							<Map
 								dispatch={dispatch}
 								mapData={state}
@@ -69,7 +74,8 @@ const Game = () => {
 								Submit
 							</button>
 						</div>
-						<div className='right-panel'>
+						{/* TODO: convert right-panel to seperate component */}
+						<div className={styles.rightPanel}>
 							{gameState.roundConfirmed ? (
 								<img src={rounds[gameState.roundNumber].expanded_img} />
 							) : (
