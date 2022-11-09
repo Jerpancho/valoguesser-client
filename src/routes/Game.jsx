@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import styles from '../css/Game.module.css';
 import Map from '../components/map';
+import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
 import { useLocation } from 'react-router-dom';
@@ -36,11 +37,20 @@ const Game = () => {
 		},
 		{ refetchOnWindowFocus: false, cacheTime: 0 }
 	);
-	console.log(data);
 	// TODO: prioritize refining the game mechanic
 	function handleRoundButton() {
 		if (gameState.mapClicked) {
 			if (!gameState.roundConfirmed) {
+				// calculate score
+				const updateRounds = rounds.map((val, index) => {
+					if (index === gameState.roundNumber) {
+						const { lat, lng } = gameState.coords;
+						const score = calculateScore(val.x_coord, val.y_coord, lng, lat);
+						return { ...val, xChosen: lng, yChosen: lat, score: score };
+					}
+					return val;
+				});
+				setRounds(updateRounds);
 				dispatch({ type: 'CONFIRM_ROUND' });
 			} else {
 				dispatch({ type: 'NEXT_ROUND' });
@@ -70,12 +80,14 @@ const Game = () => {
 								gameState={gameState}
 								rounds={rounds}
 							/>
+
+							<div className='score'>{rounds[gameState.roundNumber].score}</div>
 							<button type='button' onClick={handleRoundButton}>
 								Submit
 							</button>
 						</div>
 						{/* TODO: convert right-panel to seperate component */}
-						<div className={styles.rightPanel}>
+						<div className={styles.roundsDisplay}>
 							{gameState.roundConfirmed ? (
 								<img src={rounds[gameState.roundNumber].expanded_img} />
 							) : (

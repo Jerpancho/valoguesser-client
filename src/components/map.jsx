@@ -61,7 +61,7 @@ function Map({ dispatch, mapData, gameState, rounds }) {
 					></Polyline>
 				</LayerGroup>
 			)}
-
+			{/* another layerGroup for when the GameisOver */}
 			{/* use component to manipulate map state */}
 			<MapEvents dispatch={dispatch} gameState={gameState} />
 		</MapContainer>
