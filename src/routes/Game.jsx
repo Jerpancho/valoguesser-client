@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import styles from '../css/Game.module.css';
 import Map from '../components/map';
+import ProgressBar from '../components/progressBar';
 import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
@@ -69,7 +70,15 @@ const Game = () => {
 			<>
 				{gameState.gameOver ? (
 					// convert to a gameover component
-					<div> Game Over</div>
+					<div className='game-over'>
+						<Map
+							mapData={state}
+							rounds={rounds}
+							gameState={gameState}
+							width={500}
+							height={500}
+						/>
+					</div>
 				) : (
 					<div className={styles.game}>
 						{/* should add a condition for gameover */}
@@ -80,8 +89,9 @@ const Game = () => {
 								gameState={gameState}
 								rounds={rounds}
 							/>
-
-							<div className='score'>{rounds[gameState.roundNumber].score}</div>
+							{gameState.roundConfirmed && (
+								<ProgressBar amount={rounds[gameState.roundNumber].score} />
+							)}
 							<button type='button' onClick={handleRoundButton}>
 								Submit
 							</button>

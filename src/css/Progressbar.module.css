@@ -1,0 +1,26 @@
+.progress{
+	position: relative;
+	overflow: hidden;
+	width: 300px;
+	height: 10px;
+	border-radius: 20px;
+	border: 1px solid white;
+}
+
+.progressFill {
+	width: 0;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightblue;
+	transition: width 0.5s;
+}
+
+.progressAmount{
+	position: absolute;
+	columns: white;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}

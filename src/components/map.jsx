@@ -6,7 +6,7 @@ import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
 import PropTypes from 'prop-types';
 // pass in a setter for the coords or dispatch that will send the coordinates back
-function Map({ dispatch, mapData, gameState, rounds }) {
+function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }) {
 	// bounds is the bottom left to top right points of the map container
 	const mapRef = useRef();
 	const bounds = [
@@ -28,6 +28,7 @@ function Map({ dispatch, mapData, gameState, rounds }) {
 		<MapContainer
 			id='map-container'
 			ref={(ref) => (mapRef.current = ref)}
+			style={{ width: `${width}px`, height: `${height}px` }}
 			maxBounds={bounds}
 			bounds={bounds}
 			center={[250, 250]}
@@ -36,34 +37,60 @@ function Map({ dispatch, mapData, gameState, rounds }) {
 			whenReady={() => setMapResize(mapRef)}
 		>
 			<ImageOverlay url={mapData.base_img} bounds={bounds} />
-			{gameState.mapClicked && (
-				<Marker
-					icon={guessIcon}
-					position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
-				/>
-			)}
-			{gameState.roundConfirmed && (
-				// can convert to component
+			{gameState.gameOver ? (
+				<>
+					{rounds.map((val) => {
+						return (
+							<LayerGroup key={val.item_uid}>
+								<Marker icon={answerIcon} position={[val.y_coord, val.x_coord]} />
+								{/* if timed out, should only display the answer icon */}
+								<Marker icon={guessIcon} position={[val.yChosen, val.xChosen]} />
+								<Polyline
+									pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+									positions={[
+										[val.yChosen, val.xChosen],
+										[val.y_coord, val.x_coord],
+									]}
+								/>
+							</LayerGroup>
+						);
+					})}
+				</>
+			) : (
 				<LayerGroup>
-					<Marker
-						icon={answerIcon}
-						position={[
-							rounds[gameState.roundNumber].y_coord,
-							rounds[gameState.roundNumber].x_coord,
-						]}
-					/>
-					<Polyline
-						pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
-						positions={[
-							[gameState.coords.lat, gameState.coords.lng],
-							[rounds[gameState.roundNumber].y_coord, rounds[gameState.roundNumber].x_coord],
-						]}
-					></Polyline>
+					{/* if timed out, should not display map clicked marker and line marker */}
+					{gameState.mapClicked && (
+						<Marker
+							icon={guessIcon}
+							position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
+						/>
+					)}
+					{gameState.roundConfirmed && (
+						// can convert to component
+						<LayerGroup>
+							<Marker
+								icon={answerIcon}
+								position={[
+									rounds[gameState.roundNumber].y_coord,
+									rounds[gameState.roundNumber].x_coord,
+								]}
+							/>
+							<Polyline
+								pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+								positions={[
+									[gameState.coords.lat, gameState.coords.lng],
+									[
+										rounds[gameState.roundNumber].y_coord,
+										rounds[gameState.roundNumber].x_coord,
+									],
+								]}
+							/>
+						</LayerGroup>
+					)}
+					{/* use component to manipulate map state */}
+					<MapEvents dispatch={dispatch} gameState={gameState} />
 				</LayerGroup>
 			)}
-			{/* another layerGroup for when the GameisOver */}
-			{/* use component to manipulate map state */}
-			<MapEvents dispatch={dispatch} gameState={gameState} />
 		</MapContainer>
 	);
 }
@@ -72,7 +99,9 @@ Map.propTypes = {
 	dispatch: PropTypes.func,
 	mapData: PropTypes.object,
 	gameState: PropTypes.object,
-	rounds: PropTypes.array,
+	rounds: PropTypes.array.isRequired,
+	width: PropTypes.number,
+	height: PropTypes.number,
 };
 
 export default Map;

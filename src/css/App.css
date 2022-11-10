@@ -12,3 +12,9 @@ body {
 	height: 350px;
 	transition: all 250ms ease;
 }
+
+.game-over{
+	margin-top: 3.75rem;
+	display:grid;
+	place-items: center;
+}
