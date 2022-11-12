@@ -13,7 +13,7 @@ const CreateRoundForm = () => {
 	const [selectedMap, setSelectedMap] = useState('N/A');
 	const [difficulty, setDifficulty] = useState('normal');
 	const [guessImage, setGuessImage] = useState(null);
-	const [answerImage, setAnserImage] = useState(null);
+	const [answerImage, setAnswerImage] = useState(null);
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
 	const { isLoading, data, isError } = useQuery(
 		['maps'],
@@ -88,7 +88,12 @@ const CreateRoundForm = () => {
 							})}
 						</select>
 						{selectedMap !== 'N/A' && (
-							<Map dispatch={dispatch} mapData={selectedMap} gameState={gameState} />
+							<Map
+								dispatch={dispatch}
+								mapData={selectedMap}
+								gameState={gameState}
+								rounds={[]}
+							/>
 						)}
 						<br />
 						<label htmlFor='guess-image'>upload guessing image: </label>
@@ -110,7 +115,7 @@ const CreateRoundForm = () => {
 							name='answer-image'
 							accept='.png,.jpg'
 							onChange={(e) => {
-								handleImageUpload(e, setAnserImage);
+								handleImageUpload(e, setAnswerImage);
 							}}
 							required
 						/>

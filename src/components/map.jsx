@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, ImageOverlay, Marker, LayerGroup, Polyline } from 'react-leaflet';
+import { MapContainer, ImageOverlay, Marker, LayerGroup, Polyline, Popup } from 'react-leaflet';
 import leaflet from 'leaflet';
 import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
@@ -12,6 +12,10 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 	const bounds = [
 		[0, 0],
 		[500, 500],
+	];
+	const maxBounds = [
+		[-175, -175],
+		[675, 675],
 	];
 	// console.log(rounds);
 	// console.log(gameState);
@@ -29,7 +33,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 			id='map-container'
 			ref={(ref) => (mapRef.current = ref)}
 			style={{ width: `${width}px`, height: `${height}px` }}
-			maxBounds={bounds}
+			maxBounds={maxBounds}
 			bounds={bounds}
 			center={[250, 250]}
 			crs={leaflet.CRS.Simple}
@@ -42,9 +46,17 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 					{rounds.map((val) => {
 						return (
 							<LayerGroup key={val.item_uid}>
-								<Marker icon={answerIcon} position={[val.y_coord, val.x_coord]} />
+								<Marker icon={answerIcon} position={[val.y_coord, val.x_coord]}>
+									<Popup autoPan={true}>
+										<img src={val.expanded_img} alt='result' width={200} />
+									</Popup>
+								</Marker>
 								{/* if timed out, should only display the answer icon */}
-								<Marker icon={guessIcon} position={[val.yChosen, val.xChosen]} />
+								<Marker
+									icon={guessIcon}
+									position={[val.yChosen, val.xChosen]}
+									interactive={false}
+								/>
 								<Polyline
 									pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
 									positions={[
@@ -74,7 +86,15 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 									rounds[gameState.roundNumber].y_coord,
 									rounds[gameState.roundNumber].x_coord,
 								]}
-							/>
+							>
+								<Popup>
+									<img
+										src={rounds[gameState.roundNumber].expanded_img}
+										alt='result'
+										width={200}
+									/>
+								</Popup>
+							</Marker>
 							<Polyline
 								pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
 								positions={[
