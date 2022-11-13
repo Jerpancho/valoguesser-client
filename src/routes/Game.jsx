@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
+import useTimer from '../utils/useTimer';
 import styles from '../css/Game.module.css';
 import Map from '../components/map';
 import ProgressBar from '../components/progressBar';
@@ -21,6 +22,16 @@ const Game = () => {
 	const [rounds, setRounds] = useState([]);
 	// gets the map data in state
 	const { state } = useLocation();
+	const { time, pause, start, restart } = useTimer(() => {
+		const roundTimedOut = rounds.map((val, index) => {
+			if (gameState.roundNumber === index) {
+				return { ...val, timedOut: true };
+			}
+			return val;
+		});
+		setRounds(roundTimedOut);
+		dispatch({ type: 'TIMEDOUT' });
+	}, 30);
 	const { isLoading, data, isError } = useQuery(
 		['rounds'],
 		() => {
@@ -38,7 +49,7 @@ const Game = () => {
 		},
 		{ refetchOnWindowFocus: false, cacheTime: 0 }
 	);
-	// TODO: prioritize refining the game mechanic
+
 	function handleRoundButton() {
 		if (gameState.mapClicked) {
 			if (!gameState.roundConfirmed) {
@@ -51,13 +62,28 @@ const Game = () => {
 					}
 					return val;
 				});
+				pause();
 				setRounds(updateRounds);
 				dispatch({ type: 'CONFIRM_ROUND' });
 			} else {
+				console.log('should restart');
 				dispatch({ type: 'NEXT_ROUND' });
+				restart();
 			}
 		}
 	}
+	// start the timer when data is loaded
+	useEffect(() => {
+		if (!isLoading && data.status === 'ok') {
+			start();
+		}
+	}, [isLoading, data, start]);
+	// stop timer when game ends
+	useEffect(() => {
+		if (gameState.gameOver) {
+			pause();
+		}
+	}, [gameState]);
 
 	if (isLoading) return <div>Loading</div>;
 
@@ -83,6 +109,7 @@ const Game = () => {
 					<div className={styles.game}>
 						{/* should add a condition for gameover */}
 						<div className={styles.leftPanel}>
+							<div>{time}</div>
 							<Map
 								dispatch={dispatch}
 								mapData={state}

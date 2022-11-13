@@ -16,6 +16,9 @@ const useTimer = (onDone, timeInSeconds) => {
 	}, []);
 
 	const pause = () => {
+		if (interval.current) {
+			clearInterval(interval.current);
+		}
 		setPlay(false);
 	};
 	const start = useCallback(() => {
@@ -27,14 +30,14 @@ const useTimer = (onDone, timeInSeconds) => {
 			clearInterval(interval);
 		}
 		setTimer(timeInSeconds);
-		setPlay(() => true);
 		countDown();
+		setPlay(true);
 	};
 
 	// once the timer reaches 0, pause and clear the countdown and perform your callback action
 	useEffect(() => {
 		if (interval.current && timer <= 0) {
-			setPlay(false);
+			pause();
 			interval.current = null;
 			onDone();
 		}
@@ -50,6 +53,7 @@ const useTimer = (onDone, timeInSeconds) => {
 			clearInterval(interval.current);
 		};
 	}, [countDown, play]);
+	console.log(play);
 
 	return {
 		time: timer,

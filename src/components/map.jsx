@@ -52,18 +52,22 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 									</Popup>
 								</Marker>
 								{/* if timed out, should only display the answer icon */}
-								<Marker
-									icon={guessIcon}
-									position={[val.yChosen, val.xChosen]}
-									interactive={false}
-								/>
-								<Polyline
-									pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
-									positions={[
-										[val.yChosen, val.xChosen],
-										[val.y_coord, val.x_coord],
-									]}
-								/>
+								{!val.timedOut && (
+									<>
+										<Marker
+											icon={guessIcon}
+											position={[val.yChosen, val.xChosen]}
+											interactive={false}
+										/>
+										<Polyline
+											pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+											positions={[
+												[val.yChosen, val.xChosen],
+												[val.y_coord, val.x_coord],
+											]}
+										/>
+									</>
+								)}
 							</LayerGroup>
 						);
 					})}
@@ -71,7 +75,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 			) : (
 				<LayerGroup>
 					{/* if timed out, should not display map clicked marker and line marker */}
-					{gameState.mapClicked && (
+					{gameState.mapClicked && !gameState.timeout && (
 						<Marker
 							icon={guessIcon}
 							position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
@@ -95,16 +99,18 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 									/>
 								</Popup>
 							</Marker>
-							<Polyline
-								pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
-								positions={[
-									[gameState.coords.lat, gameState.coords.lng],
-									[
-										rounds[gameState.roundNumber].y_coord,
-										rounds[gameState.roundNumber].x_coord,
-									],
-								]}
-							/>
+							{!gameState.timeout && (
+								<Polyline
+									pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+									positions={[
+										[gameState.coords.lat, gameState.coords.lng],
+										[
+											rounds[gameState.roundNumber].y_coord,
+											rounds[gameState.roundNumber].x_coord,
+										],
+									]}
+								/>
+							)}
 						</LayerGroup>
 					)}
 					{/* use component to manipulate map state */}

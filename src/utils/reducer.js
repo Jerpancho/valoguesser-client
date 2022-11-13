@@ -3,6 +3,9 @@ export const reducer = (state, action) => {
 		case 'UPDATE_COORDS': {
 			return { ...state, coords: action.coords, mapClicked: true };
 		}
+		case 'TIMEDOUT': {
+			return { ...state, mapClicked: true, timeout: true, roundConfirmed: true };
+		}
 		case 'CONFIRM_ROUND': {
 			console.log('round confirmed');
 			return { ...state, roundConfirmed: true };
@@ -15,6 +18,7 @@ export const reducer = (state, action) => {
 					roundNumber: state.roundNumber + 1,
 					mapClicked: false,
 					roundConfirmed: false,
+					timeout: false,
 				};
 			}
 			return {
@@ -22,6 +26,7 @@ export const reducer = (state, action) => {
 				mapClicked: false,
 				roundConfirmed: false,
 				gameOver: true,
+				timeout: false,
 			};
 		}
 		default: {
