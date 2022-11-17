@@ -6,8 +6,10 @@ const Card = ({ mapData }) => {
 	return (
 		<div className={styles.card}>
 			{/* style image to be object fit cover */}
-			<img className={styles.cardImage} src={mapData.thumbnail} alt='map thumbnail' />
-			<h4>{mapData.name}</h4>
+			<div className={styles.imgContainer}>
+				<img className={styles.cardImage} src={mapData.thumbnail} alt='map thumbnail' />
+				<h4 className={styles.mapTitle}>{mapData.name}</h4>
+			</div>
 			<Link to={`/map/${mapData.map_uid}`} state={mapData}>
 				play
 			</Link>

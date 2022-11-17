@@ -1,6 +1,5 @@
 .cardContainer {
 	border: 2px solid black;
-	margin: 0 auto;
 	width: min(90%,70.5rem);
 	justify-content: space-around;
 	display:flex;
@@ -8,13 +7,24 @@
 }
 
 .card {
+	height: 20em;
 	background-color: rgba(255, 81, 156, 0.42);
 	text-align: center;
 }
 
 .cardImage {
 	min-width: 20rem;
-	height: 12.5rem;
-	object-fit: cover;
-	object-position: 0 25%;
+	max-height: 12.5rem;
+}
+
+.imgContainer{
+	position: relative;
+}
+
+.mapTitle {
+	font-size: 2rem;
+	position: absolute;
+	top:  1rem;
+	left: 1rem;
+	margin: 0;
 }

@@ -1,0 +1,19 @@
+.tutorial{
+	border: 2px solid blue;
+}
+
+.tutorialImg > img{
+	display: block;
+	margin: 0.75rem auto;
+	height: 25rem;
+}
+
+.title{
+	margin: 0.75rem auto;
+	width: 15rem;
+	text-align: center;
+}
+.list{
+	margin: 0.75rem auto;
+	width: 75%;
+}

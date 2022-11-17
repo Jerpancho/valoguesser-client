@@ -89,6 +89,10 @@ const Game = () => {
 
 	if (isError) return <div>Error retrieving data</div>;
 
+	if (data.status === 'error') {
+		return <div>{data.message}</div>;
+	}
+
 	// where the game logic should live
 	if (data.status === 'ok') {
 		// console.log(rounds);
@@ -135,9 +139,6 @@ const Game = () => {
 				)}
 			</>
 		);
-	}
-	if (data.status === 'error') {
-		return <div>{data.message}</div>;
 	}
 };
 
