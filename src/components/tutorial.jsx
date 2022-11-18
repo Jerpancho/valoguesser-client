@@ -3,7 +3,7 @@ import styles from '../css/Tutorial.module.css';
 
 function tutorial() {
 	return (
-		<div className={styles.tutorial}>
+		<div>
 			<h1 className={styles.title}>How To Play</h1>
 			<ol className={styles.list}>
 				<li>Select A Map</li>

@@ -13,3 +13,8 @@
 .leftPanel {
 	margin: 3rem 3rem 0 3rem;
 }
+
+.gameNav{
+	display: flex;
+	justify-content: space-between;
+}

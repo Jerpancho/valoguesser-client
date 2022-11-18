@@ -53,7 +53,6 @@ const useTimer = (onDone, timeInSeconds) => {
 			clearInterval(interval.current);
 		};
 	}, [countDown, play]);
-	console.log(play);
 
 	return {
 		time: timer,

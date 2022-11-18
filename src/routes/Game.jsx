@@ -3,6 +3,7 @@ import useTimer from '../utils/useTimer';
 import styles from '../css/Game.module.css';
 import Map from '../components/map';
 import ProgressBar from '../components/progressBar';
+import Modal from '../components/modal';
 import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
@@ -20,6 +21,7 @@ const defaultState = {
 const Game = () => {
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
 	const [rounds, setRounds] = useState([]);
+	const [openModal, setOpenModal] = useState(false);
 	// gets the map data in state
 	const { state } = useLocation();
 	const { time, pause, start, restart } = useTimer(() => {
@@ -29,6 +31,7 @@ const Game = () => {
 			}
 			return val;
 		});
+		setOpenModal(() => false);
 		setRounds(roundTimedOut);
 		dispatch({ type: 'TIMEDOUT' });
 	}, 30);
@@ -67,10 +70,16 @@ const Game = () => {
 				dispatch({ type: 'CONFIRM_ROUND' });
 			} else {
 				console.log('should restart');
+				setOpenModal(() => false);
 				dispatch({ type: 'NEXT_ROUND' });
 				restart();
 			}
 		}
+	}
+
+	function handlePopupModal() {
+		pause();
+		setOpenModal(true);
 	}
 	// start the timer when data is loaded
 	useEffect(() => {
@@ -111,15 +120,26 @@ const Game = () => {
 					</div>
 				) : (
 					<div className={styles.game}>
+						<Modal open={openModal} closeModal={setOpenModal} start={start} time={time} />
 						{/* should add a condition for gameover */}
 						<div className={styles.leftPanel}>
+							<div className={styles.gameNav}>
+								<button type='button' onClick={() => {}}>
+									Home
+								</button>
+								<button type='button' onClick={handlePopupModal}>
+									?
+								</button>
+							</div>
 							<div>{time}</div>
+
 							<Map
 								dispatch={dispatch}
 								mapData={state}
 								gameState={gameState}
 								rounds={rounds}
 							/>
+
 							{gameState.roundConfirmed && (
 								<ProgressBar amount={rounds[gameState.roundNumber].score} />
 							)}

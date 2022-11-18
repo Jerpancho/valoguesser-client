@@ -14,7 +14,9 @@ function App() {
 		return (
 			<div className='App'>
 				{/* display tutorial here */}
-				<Tutorial />
+				<div className={styles.tutorialContainer}>
+					<Tutorial />
+				</div>
 				{
 					<li className={styles.cardContainer}>
 						{data.map((val) => {

@@ -1,0 +1,37 @@
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('https://res.cloudinary.com/dna7c2j1e/image/upload/v1667699513/assets/Background_jilh5y.png');
+  position: fixed;
+  display: grid;
+  place-items: center;
+  background-size: cover;
+  z-index: 1001;
+}
+
+.modalContainer{
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  width: 50rem;
+}
+
+.modalContainer h1 {
+  font-size: 2.5rem;
+}
+
+.modalContainer li {
+  text-align: center;
+  font-size: 1.275rem;
+}
+
+.closeButton{
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: none;
+  margin: 0 0.5rem 0 auto;
+  display:block;
+  color: white;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
