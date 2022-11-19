@@ -154,14 +154,21 @@ const Game = () => {
 							/>
 
 							{gameState.roundConfirmed && (
-								<ProgressBar amount={rounds[gameState.roundNumber].score} />
+								<div>
+									<p className={styles.scoreNumber}>
+										{rounds[gameState.roundNumber].score}
+									</p>
+									<ProgressBar amount={rounds[gameState.roundNumber].score} />
+								</div>
 							)}
+
 							<button
+								className={styles.gameButton}
 								type='button'
 								onClick={handleRoundButton}
 								disabled={!gameState.mapClicked}
 							>
-								Submit
+								{gameState.roundConfirmed ? 'NEXT' : 'SUBMIT'}
 							</button>
 						</div>
 						{/* TODO: convert right-panel to seperate component */}

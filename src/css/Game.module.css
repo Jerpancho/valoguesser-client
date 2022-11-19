@@ -19,6 +19,41 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.scoreNumber{
+	margin-top: 1.25rem;
+	font-size: 1.275rem;
+	font-weight: 600;
+	text-align: center;
+}
+
+.gameButton {
+
+	display: block;
+	margin: 1.5rem auto;
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: white;
+	border: none;
+	background: #ef404f;
+	padding: 0.75rem 2em;
+	transition: all ease 150ms;
+}
+
+.gameButton:enabled:hover{
+	color: #152230;
+	background: white;
+}
+
+.gameButton:disabled{
+	opacity: 0.5;
+}
+
+.gameButton:enabled:active{
+	color: white;
+	background: #ef404f;
+}
+
 .buttonContainer{
 	margin: 0;
 	padding: 0;

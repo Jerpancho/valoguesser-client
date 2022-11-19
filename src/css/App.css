@@ -2,13 +2,13 @@
 	darl-blue: #001B3E
 	darker-blue: #152230
 	red: #ef404f */
+
 body {
 	margin: 0;
 	color: white;
 	background-image: url('https://res.cloudinary.com/dna7c2j1e/image/upload/v1667699513/assets/Background_jilh5y.png');
 	background-size: cover;
 }
-
 
 #map-container {
 	background-color: #001B3E;
@@ -27,7 +27,6 @@ body {
 	width: max(90%, 85rem);
 	margin: 4rem auto;
 	display: flex;
-	justify-content: space-around;
 }
 
 @media (max-width: 70rem) {
