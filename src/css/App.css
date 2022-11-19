@@ -1,4 +1,7 @@
-
+/* light-blue: #3ED3A8
+	darl-blue: #001B3E
+	darker-blue: #152230
+	red: #ef404f */
 body {
 	margin: 0;
 	color: white;
@@ -8,7 +11,7 @@ body {
 
 
 #map-container {
-	background-color: #0a2256;
+	background-color: #001B3E;
 	width: 350px;
 	height: 350px;
 	transition: all 250ms ease;
@@ -30,5 +33,7 @@ body {
 @media (max-width: 70rem) {
 	.App{
 		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 }

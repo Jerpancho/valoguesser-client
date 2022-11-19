@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-image: url('https://res.cloudinary.com/dna7c2j1e/image/upload/v1667699513/assets/Background_jilh5y.png');
+  /* background-color: rgba(00, 27, 62, 0.7); */
   position: fixed;
   display: grid;
   place-items: center;
@@ -10,7 +11,8 @@
 }
 
 .modalContainer{
-  border: 2px solid white;
+  background-color: #001B3E;
+  border: 2px solid #3ED3A8;
   border-radius: 0.5rem;
   width: 50rem;
 }

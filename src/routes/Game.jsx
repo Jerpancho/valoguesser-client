@@ -4,6 +4,7 @@ import styles from '../css/Game.module.css';
 import Map from '../components/map';
 import ProgressBar from '../components/progressBar';
 import Modal from '../components/modal';
+import RightPanel from '../components/rightPanel';
 import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
@@ -120,19 +121,31 @@ const Game = () => {
 					</div>
 				) : (
 					<div className={styles.game}>
-						<Modal open={openModal} closeModal={setOpenModal} start={start} time={time} />
+						<Modal
+							open={openModal}
+							closeModal={setOpenModal}
+							start={start}
+							time={time}
+							confirmed={gameState.roundConfirmed}
+						/>
 						{/* should add a condition for gameover */}
 						<div className={styles.leftPanel}>
 							<div className={styles.gameNav}>
 								<button type='button' onClick={() => {}}>
 									Home
 								</button>
-								<button type='button' onClick={handlePopupModal}>
-									?
-								</button>
+								<div className={styles.buttonContainer}>
+									<button
+										className={styles.helpButton}
+										type='button'
+										onClick={handlePopupModal}
+									>
+										?
+									</button>
+								</div>
 							</div>
-							<div>{time}</div>
 
+							<div>{time}</div>
 							<Map
 								dispatch={dispatch}
 								mapData={state}
@@ -143,18 +156,16 @@ const Game = () => {
 							{gameState.roundConfirmed && (
 								<ProgressBar amount={rounds[gameState.roundNumber].score} />
 							)}
-							<button type='button' onClick={handleRoundButton}>
+							<button
+								type='button'
+								onClick={handleRoundButton}
+								disabled={!gameState.mapClicked}
+							>
 								Submit
 							</button>
 						</div>
 						{/* TODO: convert right-panel to seperate component */}
-						<div className={styles.roundsDisplay}>
-							{gameState.roundConfirmed ? (
-								<img src={rounds[gameState.roundNumber].expanded_img} />
-							) : (
-								<img src={rounds[gameState.roundNumber].guess_img} />
-							)}
-						</div>
+						<RightPanel rounds={rounds} gameState={gameState} />
 					</div>
 				)}
 			</>

@@ -1,3 +1,8 @@
+/* light-blue: #3ED3A8
+	darl-blue: #001B3E
+	darker-blue: #152230
+	red: #ef404f */
+
 .tutorialImg > img{
 	display: block;
 	margin: 0.75rem auto;
@@ -6,7 +11,7 @@
 
 .title{
 	margin: 0.75rem auto;
-	width: 15rem;
+	width: min(15rem, 50%);
 	text-align: center;
 }
 .list{

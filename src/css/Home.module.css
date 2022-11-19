@@ -2,6 +2,7 @@
 	light-blue: #3ED3A8
 	darl-blue: #001B3E
 	darker-blue: #152230
+	red: #ef404f
 */
 
 .cardContainer {
@@ -36,8 +37,10 @@
 }
 
 .tutorialContainer{
+	margin: 0 auto;
 	background-color: #152230;
 	border: 2px solid #3ED3A8;
+	width: 20rem;
 }
 
 .gameLink {

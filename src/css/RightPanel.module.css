@@ -1,0 +1,14 @@
+.roundsDisplay {
+	align-self: center;
+	display: grid;
+	width: 100%;
+	height: 80vh;
+	place-items: center;
+	border-top: 2px solid rgba(21,34,48, 0.7);
+	border-bottom: 2px solid rgba(21,34,48, 0.7);
+	background-color: rgba(21,34,48, 0.7)
+}
+
+.roundsDisplay > img {
+	max-width: 95%;
+}

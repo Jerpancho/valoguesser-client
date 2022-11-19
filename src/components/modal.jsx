@@ -1,11 +1,11 @@
 import React from 'react';
 import Tutorial from './tutorial';
 import styles from '../css/Modal.module.css';
-function modal({ open, closeModal, start, time }) {
+function modal({ open, closeModal, start, time, confirmed }) {
 	if (!open) return null;
 	function handleCloseModal() {
 		closeModal(false);
-		if (time > 0) start();
+		if (time > 0 && !confirmed) start();
 	}
 	return (
 		<div className={styles.modalBackground}>

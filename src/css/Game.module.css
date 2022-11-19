@@ -1,20 +1,52 @@
+/* light-blue: #3ED3A8
+	darl-blue: #001B3E
+	darker-blue: #152230
+	red: #ef404f */
+
 .game {
 	display: flex;
 }
 
-.roundsDisplay {
-	display: grid;
-	width: 100%;
-	height: 100vh;
-	place-items: center;
-	border: 2px solid black;
-}
-
 .leftPanel {
-	margin: 3rem 3rem 0 3rem;
+	background-color: #152230;
+	padding: 0 2rem;
+	height: 100vh;
 }
 
 .gameNav{
+	margin-top: 1rem;
+	margin-bottom: 4rem;
 	display: flex;
 	justify-content: space-between;
+}
+.buttonContainer{
+	margin: 0;
+	padding: 0;
+	width: 2.5rem;
+	border: 1px solid #ef404f;
+	border-radius: 50%;
+}
+
+.helpButton {
+	font-size: 1.75rem;
+	font-weight: 500;
+	margin: 0;
+	padding: 0;
+	width: 2.5rem;
+	border-radius: 50%;
+	color: white;
+	border: 3px solid white;
+	background-color: #ef404f;
+	cursor: pointer;
+	transition: all ease 100ms;
+}
+
+.helpButton:hover{
+	color: #ef404f;
+	border: 3px solid #ef404f;
+	background-color: white;
+}
+
+.helpButton:disabled{
+	background-color: black;
 }
