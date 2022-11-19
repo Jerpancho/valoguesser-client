@@ -10,8 +10,8 @@ const Card = ({ mapData }) => {
 				<img className={styles.cardImage} src={mapData.thumbnail} alt='map thumbnail' />
 				<h4 className={styles.mapTitle}>{mapData.name}</h4>
 			</div>
-			<Link to={`/map/${mapData.map_uid}`} state={mapData}>
-				play
+			<Link className={styles.gameLink} to={`/map/${mapData.map_uid}`} state={mapData}>
+				Play
 			</Link>
 		</div>
 	);

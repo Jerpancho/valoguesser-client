@@ -18,11 +18,11 @@ function App() {
 					<Tutorial />
 				</div>
 				{
-					<li className={styles.cardContainer}>
+					<div className={styles.cardContainer}>
 						{data.map((val) => {
 							return <Card key={val.map_uid} mapData={val} />;
 						})}
-					</li>
+					</div>
 				}
 			</div>
 		);
