@@ -12,6 +12,8 @@ const progressBar = ({ amount = 0, total = 5000 }) => {
 	}, [amount]);
 	return (
 		<div className={style.progress}>
+			<span className={style.score}>{amount}</span>
+			<span className={style.total}>{total}</span>
 			<div className={style.progressFill} style={fillStyle}></div>
 		</div>
 	);

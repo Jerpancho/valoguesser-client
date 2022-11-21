@@ -5,9 +5,9 @@
 .progress{
 	margin: 1.5rem auto;
 	position: relative;
-	overflow: hidden;
+	/* overflow: hidden; */
 	width: 350px;
-	height: 10px;
+	height: 20px;
 	border-radius: 20px;
 	border: 1px solid #3ED3A8;
 }
@@ -15,6 +15,7 @@
 .progressFill {
 	width: 0;
 	height: 100%;
+	border-radius: 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -31,4 +32,20 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
+}
+
+
+.score{
+	font-weight: 700;
+	position: absolute;
+	left: 0.75rem;
+	top: 50%;
+	transform: translateY(-50%)
+}
+
+.total{
+	position: absolute;
+	right: 0.75rem;
+	top: 50%;
+	transform: translateY(-50%)
 }

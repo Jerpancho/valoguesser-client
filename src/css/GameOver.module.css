@@ -1,0 +1,5 @@
+.gameOver{
+	margin-top: 3.75rem;
+	display:grid;
+	place-items: center;
+}

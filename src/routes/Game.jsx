@@ -5,6 +5,7 @@ import Map from '../components/map';
 import ProgressBar from '../components/progressBar';
 import Modal from '../components/modal';
 import RightPanel from '../components/rightPanel';
+import GameOver from '../components/gameOver';
 import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
@@ -110,15 +111,7 @@ const Game = () => {
 			<>
 				{gameState.gameOver ? (
 					// convert to a gameover component
-					<div className='game-over'>
-						<Map
-							mapData={state}
-							rounds={rounds}
-							gameState={gameState}
-							width={500}
-							height={500}
-						/>
-					</div>
+					<GameOver state={state} rounds={rounds} gameState={gameState} />
 				) : (
 					<div className={styles.game}>
 						<Modal
@@ -155,9 +148,6 @@ const Game = () => {
 
 							{gameState.roundConfirmed && (
 								<div>
-									<p className={styles.scoreNumber}>
-										{rounds[gameState.roundNumber].score}
-									</p>
 									<ProgressBar amount={rounds[gameState.roundNumber].score} />
 								</div>
 							)}

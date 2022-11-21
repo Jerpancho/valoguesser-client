@@ -17,12 +17,6 @@ body {
 	transition: all 250ms ease;
 }
 
-.game-over{
-	margin-top: 3.75rem;
-	display:grid;
-	place-items: center;
-}
-
 .App{
 	width: max(90%, 85rem);
 	margin: 4rem auto;
