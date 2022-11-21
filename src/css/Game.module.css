@@ -44,7 +44,7 @@
 
 .gameButton:enabled:active{
 	color: white;
-	background: #ef404f;
+	background: #5c5c5c;
 }
 
 .buttonContainer{
@@ -77,4 +77,15 @@
 
 .helpButton:disabled{
 	background-color: black;
+}
+
+.gameOver{
+	margin-top: 3.75rem;
+	display:grid;
+	place-items: center;
+}
+.gameOverButtons{
+	width: 30em;
+	display: flex;
+	justify-content: space-around;
 }
