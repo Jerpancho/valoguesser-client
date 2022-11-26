@@ -1,0 +1,23 @@
+.container{
+	width: min(80rem, 90%);
+	margin: 0 auto;
+}
+
+.form{ 
+	font-size: 1.25rem;
+	margin: 0 auto;
+	width: 25rem;
+}
+.submit {
+	display: block;
+	margin: 0 auto;
+
+}
+.form > * {
+	margin: 0.75rem auto;
+}
+
+.confirmation {
+	width: 25rem;
+	margin: 0 auto;
+}

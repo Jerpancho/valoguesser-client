@@ -14,7 +14,7 @@
 }
 
 .card {
-	height: 17.5em;
+	height: 17em;
 	background-color: #001B3E;
 	text-align: center;
 }
@@ -26,13 +26,13 @@
 
 .imgContainer{
 	position: relative;
-	margin-bottom: 1rem;
+	margin-bottom: 0.4375rem;
 }
 
 .mapTitle {
 	font-size: 2rem;
 	position: absolute;
-	top:  1rem;
+	top:  0.25rem;
 	left: 1rem;
 	margin: 0;
 }
@@ -44,7 +44,7 @@
 }
 
 .gameLink {
-	font-size: 2.25rem;
+	font-size: 1.75rem;
 	font-weight: 700;
 	text-decoration: none;
 	color: #3ED3A8;

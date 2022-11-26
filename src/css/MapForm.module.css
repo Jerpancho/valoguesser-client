@@ -1,0 +1,45 @@
+/* 
+	light-blue: #3ED3A8
+	dark-blue: #001B3E
+	darker-blue: #152230
+	red: #ef404f
+*/
+.form{
+	margin: 0 auto;
+	width: min(85rem, 90%);
+	height: 65vh;
+	background-color: #152230;
+}
+
+.mapForm{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.mapForm > * {
+	margin: 0.25rem auto;
+}
+
+.mapForm > label, button {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.mapForm > input {
+	margin: 0.75rem auto;
+}
+
+.mapForm > label {
+	width: 100%;
+	text-align: center;
+	border-top: 2px solid black;
+}
+
+.mapForm > button {
+	margin-top: auto;
+	margin-bottom: 1rem;
+	font-weight: 300;
+	display: block;
+	width: 5em;
+}

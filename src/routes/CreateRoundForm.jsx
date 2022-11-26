@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import styles from '../css/RoundForm.module.css';
 import Map from '../components/map';
 import { reducer } from '../utils/reducer';
 const defaultState = {
@@ -74,8 +75,8 @@ const CreateRoundForm = () => {
 			) : isError ? (
 				<div>error loading data</div>
 			) : (
-				<div>
-					<form>
+				<div className={styles.container}>
+					<form className={styles.form}>
 						<label htmlFor='map-select'>select map: </label>
 						<select name='map-select' id='map-select' onChange={handleSelectMap}>
 							<option value='N/A'>N/A</option>
@@ -124,11 +125,8 @@ const CreateRoundForm = () => {
 							<option value='normal'>normal</option>
 							<option value='hard'>hard</option>
 						</select>
-						<button type='submit' onClick={handleSubmitForm}>
-							submit
-						</button>
 					</form>
-					<div className='confirmation'>
+					<div className={styles.confirmation}>
 						<h1>confirmation form</h1>
 						{selectedMap !== 'N/A' && (
 							<>
@@ -148,6 +146,10 @@ const CreateRoundForm = () => {
 						</p>
 						<p>selected difficulty: {difficulty}</p>
 					</div>
+
+					<button className={styles.submit} type='submit' onClick={handleSubmitForm}>
+						submit
+					</button>
 				</div>
 			)}
 		</>
