@@ -15,6 +15,7 @@ body {
 	width: 350px;
 	height: 350px;
 	transition: all 250ms ease;
+	cursor: pointer;
 }
 
 .App{

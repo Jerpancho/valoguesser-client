@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import styles from '../css/RoundForm.module.css';
 import Map from '../components/map';
 import { reducer } from '../utils/reducer';
@@ -23,7 +23,15 @@ const CreateRoundForm = () => {
 		},
 		{ refetchOnWindowFocus: false }
 	);
-
+	const mutation = useMutation(
+		async (form) =>
+			await fetch('http://localhost:4444/rounds', { method: 'POST', body: form }).then((res) =>
+				res.json()
+			),
+		{
+			onSuccess: (data) => console.log('success', data),
+		}
+	);
 	const handleSelectMap = (e) => {
 		if (e.target.value === 'N/A') setSelectedMap('N/A');
 		else {
@@ -60,9 +68,7 @@ const CreateRoundForm = () => {
 			form.append('difficulty', difficulty);
 
 			// submit a request and send data to server
-			fetch('http://localhost:4444/rounds', { method: 'POST', body: form })
-				.then((res) => res.json())
-				.then((val) => console.log('request completed', val));
+			mutation.mutate(form);
 			console.log(form);
 		} else {
 			alert('missing required inputs');
@@ -127,6 +133,13 @@ const CreateRoundForm = () => {
 						</select>
 					</form>
 					<div className={styles.confirmation}>
+						{mutation.isLoading ? (
+							<div>loading...</div>
+						) : mutation.isError ? (
+							<div>error handling request</div>
+						) : (
+							<div>success</div>
+						)}
 						<h1>confirmation form</h1>
 						{selectedMap !== 'N/A' && (
 							<>

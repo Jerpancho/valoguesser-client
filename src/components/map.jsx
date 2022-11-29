@@ -28,6 +28,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
 		iconSize: [30, 30],
 	});
+
 	return (
 		<MapContainer
 			id='map-container'
@@ -79,6 +80,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 						<Marker
 							icon={guessIcon}
 							position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
+							interactive={false}
 						/>
 					)}
 					{gameState.roundConfirmed && (
