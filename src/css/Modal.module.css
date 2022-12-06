@@ -37,3 +37,7 @@
   background: none;
   cursor: pointer;
 }
+
+.closeButton:hover{
+  color: #4effcd;
+}

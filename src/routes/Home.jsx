@@ -10,7 +10,7 @@ function App() {
 
 	if (isLoading) return <div>Loading...</div>;
 	if (isError) return <div>Error loading page...</div>;
-	if (data)
+	if (data) {
 		return (
 			<div className='App'>
 				{/* display tutorial here */}
@@ -26,6 +26,7 @@ function App() {
 				}
 			</div>
 		);
+	}
 }
 
 export default App;

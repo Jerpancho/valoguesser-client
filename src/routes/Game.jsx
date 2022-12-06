@@ -10,7 +10,7 @@ import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
 import { useLocation } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const defaultState = {
 	roundNumber: 0,
 	coords: { lat: 0, lng: 0 },
@@ -19,13 +19,13 @@ const defaultState = {
 	timeout: false,
 	gameOver: false,
 };
-
 const Game = () => {
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
 	const [rounds, setRounds] = useState([]);
 	const [openModal, setOpenModal] = useState(false);
 	// gets the map data in state
 	const { state } = useLocation();
+	const navigate = useNavigate();
 	const { time, pause, start, restart } = useTimer(() => {
 		const roundTimedOut = rounds.map((val, index) => {
 			if (gameState.roundNumber === index) {
@@ -37,6 +37,7 @@ const Game = () => {
 		setRounds(roundTimedOut);
 		dispatch({ type: 'TIMEDOUT' });
 	}, 30);
+	// get rounds data
 	const { isLoading, data, isError } = useQuery(
 		['rounds'],
 		() => {
@@ -45,14 +46,21 @@ const Game = () => {
 				.then((val) => {
 					if (val.status === 'ok') {
 						const newValue = val.data.map((el) => {
-							return { ...el, xChosen: 0, yChosen: 0, score: 0, timedOut: false };
+							return {
+								...el,
+								xChosen: 0,
+								yChosen: 0,
+								score: 0,
+								timedOut: false,
+								distance: 0,
+							};
 						});
 						setRounds(newValue);
 					}
 					return val;
 				});
 		},
-		{ refetchOnWindowFocus: false, cacheTime: 0 }
+		{ refetchOnWindowFocus: false, cacheTime: 0, keepPreviousData: true }
 	);
 
 	function handleRoundButton() {
@@ -63,7 +71,14 @@ const Game = () => {
 					if (index === gameState.roundNumber) {
 						const { lat, lng } = gameState.coords;
 						const score = calculateScore(val.x_coord, val.y_coord, lng, lat);
-						return { ...val, xChosen: lng, yChosen: lat, score: score };
+						console.log(score);
+						return {
+							...val,
+							xChosen: lng,
+							yChosen: lat,
+							score: score.score,
+							distance: score.distance,
+						};
 					}
 					return val;
 				});
@@ -124,9 +139,14 @@ const Game = () => {
 						{/* should add a condition for gameover */}
 						<div className={styles.leftPanel}>
 							<div className={styles.gameNav}>
-								<button type='button' onClick={() => {}}>
-									Home
-								</button>
+								<img
+									className={styles.homeButton}
+									src='https://res.cloudinary.com/dna7c2j1e/image/upload/v1670288041/assets/home_ck8duw.png'
+									alt='home button'
+									onClick={() => {
+										navigate('/');
+									}}
+								/>
 								<div className={styles.buttonContainer}>
 									<button
 										className={styles.helpButton}

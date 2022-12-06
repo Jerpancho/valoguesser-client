@@ -21,7 +21,6 @@
 }
 
 .gameButton {
-
 	display: block;
 	margin: 1.5rem auto;
 	font-size: 1.25rem;
@@ -80,12 +79,33 @@
 }
 
 .gameOver{
+	margin: 0 auto;
+	width: 90%;
 	margin-top: 3.75rem;
-	display:grid;
+	display: flex;
+}
+.history {
+ 	margin: 0 auto;
+}
+.menu{
+	margin: 0 auto;
+	display: grid;
 	place-items: center;
+}
+.subText{
+	font-weight: 100;
+}
+.detail{
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid white;
 }
 .gameOverButtons{
 	width: 30em;
 	display: flex;
 	justify-content: space-around;
+}
+
+.homeButton{
+	cursor: pointer;
 }

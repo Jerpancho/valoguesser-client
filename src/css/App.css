@@ -2,12 +2,13 @@
 	darl-blue: #001B3E
 	darker-blue: #152230
 	red: #ef404f */
-
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;400;700&display=swap');
 body {
 	margin: 0;
 	color: white;
 	background-image: url('https://res.cloudinary.com/dna7c2j1e/image/upload/v1667699513/assets/Background_jilh5y.png');
 	background-size: cover;
+	font-family: 'Sora', sans-serif;
 }
 
 #map-container {
@@ -30,4 +31,32 @@ body {
 		justify-content: center;
 		align-items: center;
 	}
+}
+
+.leaflet-popup-content-wrapper {
+	padding: 0.2rem;
+	box-shadow: none;
+	background-color: #3ED3A8;
+	border-radius: 1rem;
+}
+
+.leaflet-popup-content {
+	margin: 0;
+}
+
+.leaflet-popup-content img {
+	display: block;
+	margin: 0 auto;
+	border-radius: 1rem;
+}
+.leaflet-popup-content p{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: white;
+	font-size: 1rem;
+}
+
+.leaflet-popup-tip{
+	background-color: #3ED3A8;
 }

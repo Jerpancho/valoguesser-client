@@ -14,18 +14,19 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 		[500, 500],
 	];
 	const maxBounds = [
-		[-175, -175],
-		[675, 675],
+		[-200, -200],
+		[700, 700],
 	];
 	// console.log(rounds);
 	// console.log(gameState);
 	const guessIcon = leaflet.icon({
-		iconUrl: 'https://img.icons8.com/ios-glyphs/512/accuracy--v1.png',
+		iconUrl:
+			'https://res.cloudinary.com/dna7c2j1e/image/upload/v1670269539/assets/playerTarget_aysibi.png',
 		iconSize: [30, 30],
 	});
 	const answerIcon = leaflet.icon({
 		iconUrl:
-			'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
+			'https://res.cloudinary.com/dna7c2j1e/image/upload/v1670269874/assets/answer-filled_zsmdba.png',
 		iconSize: [30, 30],
 	});
 
@@ -44,12 +45,13 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 			<ImageOverlay url={mapData.base_img} bounds={bounds} />
 			{gameState.gameOver ? (
 				<>
-					{rounds.map((val) => {
+					{rounds.map((val, index) => {
 						return (
 							<LayerGroup key={val.item_uid}>
 								<Marker icon={answerIcon} position={[val.y_coord, val.x_coord]}>
-									<Popup autoPan={true}>
-										<img src={val.expanded_img} alt='result' width={200} />
+									<Popup autoPan={true} closeButton={false}>
+										<p>{index + 1}</p>
+										<img src={val.expanded_img} alt='result' width={300} />
 									</Popup>
 								</Marker>
 								{/* if timed out, should only display the answer icon */}
@@ -81,6 +83,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 							icon={guessIcon}
 							position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
 							interactive={false}
+							alt='player'
 						/>
 					)}
 					{gameState.roundConfirmed && (
@@ -92,12 +95,13 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 									rounds[gameState.roundNumber].y_coord,
 									rounds[gameState.roundNumber].x_coord,
 								]}
+								alt='answer'
 							>
-								<Popup>
+								<Popup closeButton={false}>
 									<img
 										src={rounds[gameState.roundNumber].expanded_img}
 										alt='result'
-										width={200}
+										width={250}
 									/>
 								</Popup>
 							</Marker>
