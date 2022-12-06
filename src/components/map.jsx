@@ -51,7 +51,12 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 								<Marker icon={answerIcon} position={[val.y_coord, val.x_coord]}>
 									<Popup autoPan={true} closeButton={false}>
 										<p>{index + 1}</p>
-										<img src={val.expanded_img} alt='result' width={300} />
+										<img
+											src={val.expanded_img}
+											alt='result'
+											width={300}
+											draggable={false}
+										/>
 									</Popup>
 								</Marker>
 								{/* if timed out, should only display the answer icon */}
@@ -102,6 +107,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 										src={rounds[gameState.roundNumber].expanded_img}
 										alt='result'
 										width={250}
+										draggable={false}
 									/>
 								</Popup>
 							</Marker>

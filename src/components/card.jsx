@@ -12,7 +12,12 @@ const Card = ({ mapData }) => {
 		<div className={styles.card}>
 			{/* style image to be object fit cover */}
 			<div className={styles.imgContainer}>
-				<img className={styles.cardImage} src={mapData.thumbnail} alt='map thumbnail' />
+				<img
+					className={styles.cardImage}
+					src={mapData.thumbnail}
+					alt='map thumbnail'
+					draggable={false}
+				/>
 				<h4 className={styles.mapTitle}>{mapData.name}</h4>
 			</div>
 			{/* <Link className={styles.gameLink} to={`/map/${mapData.map_uid}`} state={mapData}>

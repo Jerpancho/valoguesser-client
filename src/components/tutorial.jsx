@@ -15,6 +15,7 @@ function tutorial() {
 				<img
 					src='https://res.cloudinary.com/dna7c2j1e/image/upload/v1667702529/assets/Tutorial_Map_ydqfxd.png'
 					alt='tutorial visual'
+					draggable={false}
 				/>
 			</div>
 		</div>

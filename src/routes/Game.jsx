@@ -143,6 +143,7 @@ const Game = () => {
 									className={styles.homeButton}
 									src='https://res.cloudinary.com/dna7c2j1e/image/upload/v1670288041/assets/home_ck8duw.png'
 									alt='home button'
+									draggable={false}
 									onClick={() => {
 										navigate('/');
 									}}
