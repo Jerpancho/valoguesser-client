@@ -36,7 +36,13 @@ function gameOver({ state, rounds, gameState }) {
 				})}
 			</div>
 			<div className={style.menu}>
-				<Map mapData={state} rounds={rounds} gameState={gameState} width={500} height={500} />
+				<Map
+					mapData={state}
+					rounds={rounds}
+					gameState={gameState}
+					width={500}
+					height={500}
+				/>
 				<ProgressBar amount={totalScore} total={25000} width={700} />
 				<div className={style.gameOverButtons}>
 					<button

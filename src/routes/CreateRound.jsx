@@ -25,9 +25,10 @@ const CreateRoundForm = () => {
 	);
 	const mutation = useMutation(
 		async (form) =>
-			await fetch('http://localhost:4444/rounds', { method: 'POST', body: form }).then((res) =>
-				res.json()
-			),
+			await fetch('http://localhost:4444/rounds', {
+				method: 'POST',
+				body: form,
+			}).then((res) => res.json()),
 		{
 			onSuccess: (data) => console.log('success', data),
 		}
@@ -84,7 +85,11 @@ const CreateRoundForm = () => {
 				<div className={styles.container}>
 					<form className={styles.form}>
 						<label htmlFor='map-select'>select map: </label>
-						<select name='map-select' id='map-select' onChange={handleSelectMap}>
+						<select
+							name='map-select'
+							id='map-select'
+							onChange={handleSelectMap}
+						>
 							<option value='N/A'>N/A</option>
 							{data.map((val, index) => {
 								return (
@@ -127,7 +132,11 @@ const CreateRoundForm = () => {
 							required
 						/>
 						<br />
-						<select name='difficulty' id='difficulty' onChange={handleDifficultyChange}>
+						<select
+							name='difficulty'
+							id='difficulty'
+							onChange={handleDifficultyChange}
+						>
 							<option value='normal'>normal</option>
 							<option value='hard'>hard</option>
 						</select>
@@ -149,18 +158,24 @@ const CreateRoundForm = () => {
 						)}
 						<p>
 							selected coords (lat,lng):
-							{Math.floor(gameState.coords.lat)},{Math.floor(gameState.coords.lng)}
+							{Math.floor(gameState.coords.lat)},
+							{Math.floor(gameState.coords.lng)}
 						</p>
 						<p>
 							guess image: <span>{guessImage && guessImage.name}</span>
 						</p>
 						<p>
-							answer image: <span>{answerImage && answerImage.name}</span>
+							answer image:{' '}
+							<span>{answerImage && answerImage.name}</span>
 						</p>
 						<p>selected difficulty: {difficulty}</p>
 					</div>
 
-					<button className={styles.submit} type='submit' onClick={handleSubmitForm}>
+					<button
+						className={styles.submit}
+						type='submit'
+						onClick={handleSubmitForm}
+					>
 						submit
 					</button>
 				</div>

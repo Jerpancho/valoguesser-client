@@ -1,12 +1,26 @@
 import React, { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, ImageOverlay, Marker, LayerGroup, Polyline, Popup } from 'react-leaflet';
+import {
+	MapContainer,
+	ImageOverlay,
+	Marker,
+	LayerGroup,
+	Polyline,
+	Popup,
+} from 'react-leaflet';
 import leaflet from 'leaflet';
 import { setMapResize } from '../utils/sizeObserver';
 import MapEvents from './mapEvents';
 import PropTypes from 'prop-types';
 // pass in a setter for the coords or dispatch that will send the coordinates back
-function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }) {
+function Map({
+	dispatch,
+	mapData,
+	gameState,
+	rounds,
+	width = 400,
+	height = 400,
+}) {
 	// bounds is the bottom left to top right points of the map container
 	const mapRef = useRef();
 	const bounds = [
@@ -26,7 +40,7 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 	});
 	const answerIcon = leaflet.icon({
 		iconUrl:
-			'https://res.cloudinary.com/dna7c2j1e/image/upload/v1670269874/assets/answer-filled_zsmdba.png',
+			'https://res.cloudinary.com/dna7c2j1e/image/upload/v1670521081/assets/answer-filled_m3kfp7.png',
 		iconSize: [30, 30],
 	});
 
@@ -48,7 +62,10 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 					{rounds.map((val, index) => {
 						return (
 							<LayerGroup key={val.item_uid}>
-								<Marker icon={answerIcon} position={[val.y_coord, val.x_coord]}>
+								<Marker
+									icon={answerIcon}
+									position={[val.y_coord, val.x_coord]}
+								>
 									<Popup autoPan={true} closeButton={false}>
 										<p>{index + 1}</p>
 										<img
@@ -68,7 +85,11 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 											interactive={false}
 										/>
 										<Polyline
-											pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+											pathOptions={{
+												color: '#3ED3A8',
+												weight: 4,
+												dashArray: '10',
+											}}
 											positions={[
 												[val.yChosen, val.xChosen],
 												[val.y_coord, val.x_coord],
@@ -86,7 +107,10 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 					{gameState.mapClicked && !gameState.timeout && (
 						<Marker
 							icon={guessIcon}
-							position={[Math.floor(gameState.coords.lat), Math.floor(gameState.coords.lng)]}
+							position={[
+								Math.floor(gameState.coords.lat),
+								Math.floor(gameState.coords.lng),
+							]}
 							interactive={false}
 							alt='player'
 						/>
@@ -113,7 +137,11 @@ function Map({ dispatch, mapData, gameState, rounds, width = 400, height = 400 }
 							</Marker>
 							{!gameState.timeout && (
 								<Polyline
-									pathOptions={{ color: '#3ED3A8', weight: 4, dashArray: '10' }}
+									pathOptions={{
+										color: '#3ED3A8',
+										weight: 4,
+										dashArray: '10',
+									}}
 									positions={[
 										[gameState.coords.lat, gameState.coords.lng],
 										[

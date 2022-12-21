@@ -55,17 +55,33 @@ function CreateMap() {
 	return (
 		<div className={styles.form}>
 			<div className='errors'>
-				{error.length > 0 && error.map((val, idx) => <p key={idx}>{val}</p>)}
+				{error.length > 0 &&
+					error.map((val, idx) => <p key={idx}>{val}</p>)}
 			</div>
 			<div className={styles.mapForm}>
 				<label htmlFor='name'>Name: </label>
 				<input type='text' name='name' ref={formNameRef} />
 				<label htmlFor='guess-image'>Base image (no callouts): </label>
-				<input type='file' name='guess-image' ref={guessImageRef} accept='.png,.jpg' />
+				<input
+					type='file'
+					name='guess-image'
+					ref={guessImageRef}
+					accept='.png,.jpg'
+				/>
 				<label htmlFor='callout-image'>Answer image (with callout): </label>
-				<input type='file' name='callout-image' ref={calloutImageRef} accept='.png,.jpg' />
+				<input
+					type='file'
+					name='callout-image'
+					ref={calloutImageRef}
+					accept='.png,.jpg'
+				/>
 				<label htmlFor='thumbnail'>Thumbnail: </label>
-				<input type='file' name='thumbnail' ref={thumbnailImageRef} accept='.png,.jpg' />
+				<input
+					type='file'
+					name='thumbnail'
+					ref={thumbnailImageRef}
+					accept='.png,.jpg'
+				/>
 				<button type='button' onClick={handleSubmit}>
 					SUBMIT
 				</button>

@@ -7,7 +7,9 @@ const Test = () => {
 	const { isLoading, data, isError, placeholderData } = useQuery(
 		['rounds'],
 		() => {
-			return fetch(`http://localhost:4444/rounds/${bind}`).then((res) => res.json());
+			return fetch(`http://localhost:4444/rounds/${bind}`).then((res) =>
+				res.json()
+			);
 		},
 		{ placeholderData: { data: 'Loading' } }
 	);
@@ -15,7 +17,15 @@ const Test = () => {
 	console.log(data);
 	console.log(isError);
 	console.log(placeholderData);
-	return <div>{isLoading ? <div>{placeholderData.data}</div> : <div>{data.status}</div>}</div>;
+	return (
+		<div>
+			{isLoading ? (
+				<div>{placeholderData.data}</div>
+			) : (
+				<div>{data.status}</div>
+			)}
+		</div>
+	);
 };
 
 export default Test;

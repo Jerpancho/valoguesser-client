@@ -4,7 +4,12 @@ export const reducer = (state, action) => {
 			return { ...state, coords: action.coords, mapClicked: true };
 		}
 		case 'TIMEDOUT': {
-			return { ...state, mapClicked: true, timeout: true, roundConfirmed: true };
+			return {
+				...state,
+				mapClicked: true,
+				timeout: true,
+				roundConfirmed: true,
+			};
 		}
 		case 'CONFIRM_ROUND': {
 			console.log('round confirmed');

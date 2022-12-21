@@ -6,11 +6,11 @@ import ProgressBar from '../components/progressBar';
 import Modal from '../components/modal';
 import RightPanel from '../components/rightPanel';
 import GameOver from '../components/gameOver';
+import HomeIcon from '../components/homeIcon';
 import { calculateScore } from '../utils/calculateScore';
 import { useQuery } from '@tanstack/react-query';
 import { reducer } from '../utils/reducer';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 const defaultState = {
 	roundNumber: 0,
 	coords: { lat: 0, lng: 0 },
@@ -25,7 +25,6 @@ const Game = () => {
 	const [openModal, setOpenModal] = useState(false);
 	// gets the map data in state
 	const { state } = useLocation();
-	const navigate = useNavigate();
 	const { time, pause, start, restart } = useTimer(() => {
 		const roundTimedOut = rounds.map((val, index) => {
 			if (gameState.roundNumber === index) {
@@ -70,7 +69,12 @@ const Game = () => {
 				const updateRounds = rounds.map((val, index) => {
 					if (index === gameState.roundNumber) {
 						const { lat, lng } = gameState.coords;
-						const score = calculateScore(val.x_coord, val.y_coord, lng, lat);
+						const score = calculateScore(
+							val.x_coord,
+							val.y_coord,
+							lng,
+							lat
+						);
 						console.log(score);
 						return {
 							...val,
@@ -136,10 +140,10 @@ const Game = () => {
 							time={time}
 							confirmed={gameState.roundConfirmed}
 						/>
-						{/* should add a condition for gameover */}
 						<div className={styles.leftPanel}>
 							<div className={styles.gameNav}>
-								<img
+								<HomeIcon />
+								{/* <img
 									className={styles.homeButton}
 									src='https://res.cloudinary.com/dna7c2j1e/image/upload/v1670288041/assets/home_ck8duw.png'
 									alt='home button'
@@ -147,7 +151,7 @@ const Game = () => {
 									onClick={() => {
 										navigate('/');
 									}}
-								/>
+								/> */}
 								<div className={styles.buttonContainer}>
 									<button
 										className={styles.helpButton}
@@ -169,7 +173,9 @@ const Game = () => {
 
 							{gameState.roundConfirmed && (
 								<div>
-									<ProgressBar amount={rounds[gameState.roundNumber].score} />
+									<ProgressBar
+										amount={rounds[gameState.roundNumber].score}
+									/>
 								</div>
 							)}
 

@@ -1,29 +1,46 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AuthProvider from './context/AuthProvider';
 import Game from './routes/Game';
 import Home from './routes/Home';
-import CreateMap from './routes/CreateMapForm';
-import CreateRound from './routes/CreateRoundForm';
+import CreateMap from './routes/CreateMap';
+import CreateRound from './routes/CreateRound';
 import Error from './routes/Error';
-import Test from './routes/Test';
+import ProtectedRoute from './components/requiresAuth';
+// import Test from './routes/Test';
 import './css/App.css';
+
+const ROLES = {
+	User: 0,
+	Admin: 1000,
+	verifiedUser: 1001,
+};
 
 function App() {
 	return (
 		<BrowserRouter>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				{/* instead, maybe create two routes to be a child of '/' which will be either mapSelect or the game.
-						this way, we can grab the map data in the parent element and pass in the data to either child
-						via outlet context and useOutletContext
-				*/}
-				<Route path='/map/:id' element={<Game />} />
-				<Route path='map/create' element={<CreateMap />} />
-				<Route path='round/create' element={<CreateRound />} />
-				<Route path='*' element={<Error />} />
-				<Route path='test' element={<Test />} />
-				{/* for testing only */}
-			</Routes>
+			<AuthProvider>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/map/:id' element={<Game />} />
+					{/* create login and register routes */}
+
+					{/* these routes should be protected */}
+					<Route
+						element={
+							<ProtectedRoute
+								acceptedRoles={[ROLES.Admin, ROLES.verifiedUser]}
+							/>
+						}
+					>
+						<Route path='create/map' element={<CreateMap />} />
+						<Route path='create/round' element={<CreateRound />} />
+					</Route>
+					<Route path='*' element={<Error />} />
+					{/* for testing only */}
+					{/* <Route path='test' element={<Test />} /> */}
+				</Routes>
+			</AuthProvider>
 		</BrowserRouter>
 	);
 }

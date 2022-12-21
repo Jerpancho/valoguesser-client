@@ -6,9 +6,15 @@ function rightPanel({ rounds, gameState }) {
 	return (
 		<div className={styles.roundsDisplay}>
 			{gameState.roundConfirmed ? (
-				<img src={rounds[gameState.roundNumber].expanded_img} draggable={false} />
+				<img
+					src={rounds[gameState.roundNumber].expanded_img}
+					draggable={false}
+				/>
 			) : (
-				<img src={rounds[gameState.roundNumber].guess_img} draggable={false} />
+				<img
+					src={rounds[gameState.roundNumber].guess_img}
+					draggable={false}
+				/>
 			)}
 		</div>
 	);
