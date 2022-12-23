@@ -7,6 +7,7 @@ import CreateMap from './routes/CreateMap';
 import CreateRound from './routes/CreateRound';
 import Error from './routes/Error';
 import Login from './routes/Login';
+import Register from './routes/Register';
 import ProtectedRoute from './components/protectedRoute';
 import PersistentLogin from './routes/persistentLogin';
 // import Test from './routes/Test';
@@ -26,6 +27,7 @@ function App() {
 				<Route path='/map/:id' element={<Game />} />
 				{/* create login and register routes */}
 				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
 				{/* these routes should be protected if you aren't an admin or verified user*/}
 				<Route element={<PersistentLogin />}>
 					<Route
