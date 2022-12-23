@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AuthProvider from './context/AuthProvider';
+
 import Game from './routes/Game';
 import Home from './routes/Home';
 import CreateMap from './routes/CreateMap';
 import CreateRound from './routes/CreateRound';
 import Error from './routes/Error';
-import ProtectedRoute from './components/requiresAuth';
+import Login from './routes/Login';
+import ProtectedRoute from './components/protectedRoute';
+import PersistentLogin from './routes/persistentLogin';
 // import Test from './routes/Test';
 import './css/App.css';
 
@@ -19,28 +21,24 @@ const ROLES = {
 function App() {
 	return (
 		<BrowserRouter>
-			<AuthProvider>
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/map/:id' element={<Game />} />
-					{/* create login and register routes */}
-
-					{/* these routes should be protected */}
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/map/:id' element={<Game />} />
+				{/* create login and register routes */}
+				<Route path='/login' element={<Login />} />
+				{/* these routes should be protected if you aren't an admin or verified user*/}
+				<Route element={<PersistentLogin />}>
 					<Route
-						element={
-							<ProtectedRoute
-								acceptedRoles={[ROLES.Admin, ROLES.verifiedUser]}
-							/>
-						}
+						element={<ProtectedRoute acceptedRoles={[ROLES.Admin]} />}
 					>
 						<Route path='create/map' element={<CreateMap />} />
 						<Route path='create/round' element={<CreateRound />} />
 					</Route>
-					<Route path='*' element={<Error />} />
-					{/* for testing only */}
-					{/* <Route path='test' element={<Test />} /> */}
-				</Routes>
-			</AuthProvider>
+				</Route>
+				<Route path='*' element={<Error />} />
+				{/* for testing only */}
+				{/* <Route path='test' element={<Test />} /> */}
+			</Routes>
 		</BrowserRouter>
 	);
 }

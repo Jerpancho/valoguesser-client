@@ -2,6 +2,8 @@ import React, { useState, useReducer } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import styles from '../css/RoundForm.module.css';
 import Map from '../components/map';
+import Logout from '../components/logout';
+import { useNavigate } from 'react-router-dom';
 import { reducer } from '../utils/reducer';
 const defaultState = {
 	roundNumber: 0,
@@ -16,6 +18,8 @@ const CreateRoundForm = () => {
 	const [guessImage, setGuessImage] = useState(null);
 	const [answerImage, setAnswerImage] = useState(null);
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
+
+	const navigate = useNavigate();
 	const { isLoading, data, isError } = useQuery(
 		['maps'],
 		() => {
@@ -24,8 +28,8 @@ const CreateRoundForm = () => {
 		{ refetchOnWindowFocus: false }
 	);
 	const mutation = useMutation(
-		async (form) =>
-			await fetch('http://localhost:4444/rounds', {
+		(form) =>
+			fetch('http://localhost:4444/rounds', {
 				method: 'POST',
 				body: form,
 			}).then((res) => res.json()),
@@ -83,6 +87,17 @@ const CreateRoundForm = () => {
 				<div>error loading data</div>
 			) : (
 				<div className={styles.container}>
+					<div>
+						<Logout />
+						<button
+							onClick={() => {
+								navigate('/create/map');
+							}}
+						>
+							create map
+						</button>
+					</div>
+
 					<form className={styles.form}>
 						<label htmlFor='map-select'>select map: </label>
 						<select

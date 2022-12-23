@@ -1,13 +1,15 @@
 import React, { useRef, useState } from 'react';
 import styles from '../css/MapForm.module.css';
+import Logout from '../components/logout';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 function CreateMap() {
 	const [error, setError] = useState([]);
 	const formNameRef = useRef();
 	const guessImageRef = useRef();
 	const calloutImageRef = useRef();
 	const thumbnailImageRef = useRef();
-
+	const navigate = useNavigate();
 	const { isError, isLoading, data, mutate } = useMutation(
 		async (data) => {
 			const res = await fetch('http://localhost:4444/maps/', {
@@ -54,6 +56,17 @@ function CreateMap() {
 	// add thumbnail
 	return (
 		<div className={styles.form}>
+			<div>
+				<Logout />
+				<button
+					onClick={() => {
+						navigate('/create/round');
+					}}
+				>
+					create round
+				</button>
+			</div>
+
 			<div className='errors'>
 				{error.length > 0 &&
 					error.map((val, idx) => <p key={idx}>{val}</p>)}

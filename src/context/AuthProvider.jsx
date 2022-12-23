@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AuthContext } from './AuthContext';
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
 	const [auth, setAuth] = useState({});
 
@@ -11,5 +11,9 @@ function AuthProvider({ children }) {
 		</AuthContext.Provider>
 	);
 }
+
+AuthProvider.propTypes = {
+	children: PropTypes.element,
+};
 
 export default AuthProvider;

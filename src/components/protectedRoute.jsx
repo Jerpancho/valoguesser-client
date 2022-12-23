@@ -7,6 +7,7 @@ function ProtectedRoute({ acceptedRoles }) {
 	const { auth } = useAuth();
 	// console.log(auth);
 	const location = useLocation();
+
 	if (acceptedRoles.includes(auth?.role)) {
 		return <Outlet />;
 	}
