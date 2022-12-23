@@ -4,8 +4,8 @@ import { useMutation } from '@tanstack/react-query';
 import useAuth from '../utils/useAuth';
 function Login() {
 	const { setAuth } = useAuth();
-	const userRef = useRef('vlgAdmin406');
-	const passRef = useRef('KjJtFdSg123');
+	const userRef = useRef();
+	const passRef = useRef();
 	const [error, setError] = useState('');
 	const location = useLocation();
 	const navigate = useNavigate();
