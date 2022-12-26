@@ -7,8 +7,8 @@ function logout() {
 	const navigate = useNavigate();
 	const handleLogout = async () => {
 		await logout();
-		console.log(location);
-		navigate('/login', { state: { from: location }, replace: true });
+		// console.log(location);
+		navigate('/', { state: { from: location }, replace: true });
 	};
 	return (
 		<button

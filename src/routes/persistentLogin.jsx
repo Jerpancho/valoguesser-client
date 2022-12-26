@@ -12,7 +12,7 @@ function PersistentLogin() {
 			try {
 				await refresh();
 			} catch (error) {
-				console.error(error);
+				// console.error(error);
 			} finally {
 				setLoading(false);
 			}

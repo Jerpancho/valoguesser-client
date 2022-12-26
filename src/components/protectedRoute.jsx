@@ -11,12 +11,12 @@ function ProtectedRoute({ acceptedRoles }) {
 	if (acceptedRoles.includes(auth?.role)) {
 		return <Outlet />;
 	}
-
-	console.log('not authenthicated');
+	// not authenthicated
 	if (auth?.user)
-		return <Navigate to='*' state={{ from: location }} replace />;
-
-	console.log('not authorized');
+		return (
+			<Navigate to='unauthenthicated' state={{ from: location }} replace />
+		);
+	// not authorized
 	return <Navigate to='/' state={{ from: location }} replace />;
 }
 

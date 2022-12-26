@@ -6,6 +6,7 @@ import Home from './routes/Home';
 import CreateMap from './routes/CreateMap';
 import CreateRound from './routes/CreateRound';
 import Error from './routes/Error';
+import Unauthenthicated from './routes/Unauthenthicated';
 import Login from './routes/Login';
 import Register from './routes/Register';
 import ProtectedRoute from './components/protectedRoute';
@@ -23,13 +24,14 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='/' element={<Home />} />
 				<Route path='/map/:id' element={<Game />} />
-				{/* create login and register routes */}
-				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />
+				{/* create login and register routes */}
 				{/* these routes should be protected if you aren't an admin or verified user*/}
 				<Route element={<PersistentLogin />}>
+					{/* if you already have a refresh token then you shouldnt have access to register and login routes */}
+					<Route path='/' element={<Home />} />
+					<Route path='/login' element={<Login />} />
 					<Route
 						element={<ProtectedRoute acceptedRoles={[ROLES.Admin]} />}
 					>
@@ -37,6 +39,7 @@ function App() {
 						<Route path='create/round' element={<CreateRound />} />
 					</Route>
 				</Route>
+				<Route path='unauthenthicated' element={<Unauthenthicated />} />
 				<Route path='*' element={<Error />} />
 				{/* for testing only */}
 				{/* <Route path='test' element={<Test />} /> */}

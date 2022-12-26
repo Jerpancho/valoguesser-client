@@ -5,6 +5,7 @@ import Map from '../components/map';
 import Logout from '../components/logout';
 import { useNavigate } from 'react-router-dom';
 import { reducer } from '../utils/reducer';
+import useAuth from '../utils/useAuth';
 const defaultState = {
 	roundNumber: 0,
 	coords: { lat: 0, lng: 0 },
@@ -19,6 +20,7 @@ const CreateRoundForm = () => {
 	const [answerImage, setAnswerImage] = useState(null);
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
 
+	const { auth } = useAuth();
 	const navigate = useNavigate();
 	const { isLoading, data, isError } = useQuery(
 		['maps'],
@@ -27,15 +29,12 @@ const CreateRoundForm = () => {
 		},
 		{ refetchOnWindowFocus: false }
 	);
-	const mutation = useMutation(
-		(form) =>
-			fetch('http://localhost:4444/rounds', {
-				method: 'POST',
-				body: form,
-			}).then((res) => res.json()),
-		{
-			onSuccess: (data) => console.log('success', data),
-		}
+	const mutation = useMutation((form) =>
+		fetch('http://localhost:4444/rounds', {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${auth?.accessToken}` },
+			body: form,
+		}).then((res) => res.json())
 	);
 	const handleSelectMap = (e) => {
 		if (e.target.value === 'N/A') setSelectedMap('N/A');
@@ -74,7 +73,7 @@ const CreateRoundForm = () => {
 
 			// submit a request and send data to server
 			mutation.mutate(form);
-			console.log(form);
+			// console.log(form);
 		} else {
 			alert('missing required inputs');
 		}

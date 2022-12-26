@@ -1,14 +1,21 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import useAuth from '../utils/useAuth';
 function Login() {
-	const { setAuth } = useAuth();
+	const { auth, setAuth } = useAuth();
 	const userRef = useRef();
 	const passRef = useRef();
 	const [error, setError] = useState('');
 	const location = useLocation();
+	console.log(location);
 	const navigate = useNavigate();
+
+	//LOG OUT if tried to route back to login
+	useEffect(() => {
+		console.log(auth);
+		if (auth?.accessToken) navigate('/');
+	}, []);
 
 	const mutation = useMutation(
 		(data) => {
@@ -49,15 +56,19 @@ function Login() {
 	return (
 		<div>
 			<h1>Login</h1>
-			<div className='login'></div>
-			<div>{error}</div>
-			<form onSubmit={handleLogin}>
-				<label htmlFor='username'>username: </label>
-				<input type='text' id='username' name='username' ref={userRef} />
-				<label htmlFor='password'>password: </label>
-				<input type='text' id='password' name='password' ref={passRef} />
-				<button>login</button>
-			</form>
+			<div className='login'>
+				{location?.state?.registration && (
+					<div>{location?.state?.registration}</div>
+				)}
+				<div>{error}</div>
+				<form onSubmit={handleLogin}>
+					<label htmlFor='username'>username: </label>
+					<input type='text' id='username' name='username' ref={userRef} />
+					<label htmlFor='password'>password: </label>
+					<input type='text' id='password' name='password' ref={passRef} />
+					<button>login</button>
+				</form>
+			</div>
 		</div>
 	);
 }

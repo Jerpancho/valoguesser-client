@@ -3,27 +3,25 @@ import styles from '../css/MapForm.module.css';
 import Logout from '../components/logout';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../utils/useAuth';
 function CreateMap() {
+	const { auth } = useAuth();
 	const [error, setError] = useState([]);
 	const formNameRef = useRef();
 	const guessImageRef = useRef();
 	const calloutImageRef = useRef();
 	const thumbnailImageRef = useRef();
 	const navigate = useNavigate();
-	const { isError, isLoading, data, mutate } = useMutation(
-		async (data) => {
-			const res = await fetch('http://localhost:4444/maps/', {
-				method: 'POST',
-				body: data,
-			});
-			return await res.json();
-		},
-		{
-			onSuccess: (data) => {
-				console.log(data);
-			},
-		}
-	);
+	// console.log(auth);
+	const { isError, isLoading, data, mutate } = useMutation(async (data) => {
+		const res = await fetch('http://localhost:4444/maps/', {
+			method: 'POST',
+			credentials: 'include',
+			headers: { Authorization: `Bearer ${auth?.accessToken}` },
+			body: data,
+		});
+		return await res.json();
+	});
 	function handleSubmit() {
 		setError([]);
 		const formData = new FormData();

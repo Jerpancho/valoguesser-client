@@ -1,50 +1,52 @@
 import React, { useState } from 'react';
-
-const userRegex = /^[a-z0-9]+$/;
-const passwordLength = /(?=.{8,})/;
-const passwordUpper = /(?=.*[A-Z])/;
-const passwordLower = /(?=.*[a-z])/;
-const specialCharacters = /(?=.*[!#$%&? "])/;
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 function Register() {
 	const [errors, setErrors] = useState([]);
-	const [serverError, setServerErrors] = useState([]);
 	const [user, setUser] = useState('');
 	const [password, setPassword] = useState('');
 	const [matchPassword, setMatchPassword] = useState('');
+	const navigate = useNavigate();
 
+	const mutate = useMutation(
+		(user) => {
+			return fetch('http://localhost:4444/register', {
+				method: 'POST',
+				credentials: 'include',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					username: user.username,
+					password: user.password,
+				}),
+			}).then((res) => res.json());
+		},
+		{
+			onSettled: (data) => {
+				if (data?.errors) {
+					return setErrors(data.errors);
+				}
+				if (data?.user) {
+					navigate('/login', {
+						state: { registration: data?.message },
+					});
+				}
+			},
+		}
+	);
 	// handle user validation here
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// reset errors
 		setErrors(() => []);
-		const userLowerCase = user.toLowerCase();
-		if (!userRegex.test(userLowerCase) || user.length <= 3)
-			setErrors((prev) => [
-				...prev,
-				'username must be alphanumeric and longer than 3 characters',
-			]);
-		if (!passwordLength.test(password))
-			setErrors((prev) => [
-				...prev,
-				'password must at least be 8 characters long',
-			]);
-		if (!passwordLower.test(password) || !passwordUpper.test(password))
-			setErrors((prev) => [
-				...prev,
-				'password must at least have 1 upper and 1 lower case character',
-			]);
-		if (!specialCharacters.test(password))
-			setErrors((prev) => [
-				...prev,
-				'password must have at least one special character e.g. !&$',
-			]);
-		if (matchPassword !== password)
-			setErrors((prev) => [...prev, 'both passwords must be matching']);
-		if (errors.length > 0) return null;
-
+		const userLowerCase = user?.toLowerCase();
+		if (!user || !password)
+			return setErrors((prev) => [...prev, 'missing username or password']);
+		if (password !== matchPassword)
+			return setErrors((prev) => [...prev, 'passwords must be matching']);
 		/* if it got passed this point, 
 			then account should be valid and can be registered with the server
 		*/
+		mutate.mutate({ username: userLowerCase, password });
 	};
 	return (
 		<section>
