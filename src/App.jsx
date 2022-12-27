@@ -36,12 +36,12 @@ function App() {
 					<Route
 						element={<ProtectedRoute acceptedRoles={[ROLES.Admin]} />}
 					>
-						<Route path='create/map' element={<CreateMap />} />
-						<Route path='create/round' element={<CreateRound />} />
+						<Route path='/create/map' element={<CreateMap />} />
+						<Route path='/create/round' element={<CreateRound />} />
 					</Route>
 				</Route>
-				<Route path='unauthenthicated' element={<Unauthenthicated />} />
-				<Route path='*' element={<Error />} />
+				<Route path='/unauthenthicated' element={<Unauthenthicated />} />
+				<Route path='/*' element={<Error />} />
 				{/* for testing only */}
 				{/* <Route path='test' element={<Test />} /> */}
 			</Routes>
