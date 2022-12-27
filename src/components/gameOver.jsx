@@ -3,12 +3,12 @@ import Map from './map';
 import PropTypes from 'prop-types';
 import ProgressBar from './progressBar';
 import style from '../css/Game.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function gameOver({ state, rounds, gameState }) {
 	const [totalScore, setTotalScore] = useState(0);
 	const navigate = useNavigate();
-
+	const location = useLocation();
 	function calculateTotalScore() {
 		let result = 0;
 		rounds.forEach((val) => {
@@ -56,7 +56,11 @@ function gameOver({ state, rounds, gameState }) {
 					<button
 						className={style.gameButton}
 						onClick={() => {
-							window.location.reload(false);
+							console.log(location);
+							navigate(0, {
+								replace: true,
+								state: location.state,
+							});
 						}}
 					>
 						PLAY AGAIN
