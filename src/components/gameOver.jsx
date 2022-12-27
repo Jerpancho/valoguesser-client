@@ -51,18 +51,6 @@ function gameOver({ state, rounds, gameState }) {
 							navigate('/');
 						}}
 					>
-						HOME
-					</button>
-					<button
-						className={style.gameButton}
-						onClick={() => {
-							console.log(location);
-							navigate(0, {
-								replace: true,
-								state: location.state,
-							});
-						}}
-					>
 						PLAY AGAIN
 					</button>
 				</div>
