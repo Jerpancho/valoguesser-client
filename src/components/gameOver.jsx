@@ -3,12 +3,11 @@ import Map from './map';
 import PropTypes from 'prop-types';
 import ProgressBar from './progressBar';
 import style from '../css/Game.module.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function gameOver({ state, rounds, gameState }) {
 	const [totalScore, setTotalScore] = useState(0);
 	const navigate = useNavigate();
-	const location = useLocation();
 	function calculateTotalScore() {
 		let result = 0;
 		rounds.forEach((val) => {
