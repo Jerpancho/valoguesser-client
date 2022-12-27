@@ -40,7 +40,9 @@ const Game = () => {
 	const { isLoading, data, isError } = useQuery(
 		['rounds'],
 		() => {
-			return fetch(`https://localhost:4444/rounds/${state.map_uid}`)
+			return fetch(
+				`https://valoguesser-server.up.railway.app/rounds/${state.map_uid}`
+			)
 				.then((res) => res.json())
 				.then((val) => {
 					if (val.status === 'ok') {

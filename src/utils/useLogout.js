@@ -5,7 +5,7 @@ const useLogout = () => {
 	const logout = async () => {
 		setAuth({});
 		try {
-			await fetch('http://valoguesser-server.up.railway.app/logout', {
+			await fetch('https://valoguesser-server.up.railway.app/logout', {
 				method: 'DELETE',
 				credentials: 'include',
 			});

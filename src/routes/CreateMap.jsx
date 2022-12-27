@@ -14,12 +14,15 @@ function CreateMap() {
 	const navigate = useNavigate();
 	// console.log(auth);
 	const { isError, isLoading, data, mutate } = useMutation(async (data) => {
-		const res = await fetch('https://localhost:4444/maps/', {
-			method: 'POST',
-			credentials: 'include',
-			headers: { Authorization: `Bearer ${auth?.accessToken}` },
-			body: data,
-		});
+		const res = await fetch(
+			'https://valoguesser-server.up.railway.app/maps/',
+			{
+				method: 'POST',
+				credentials: 'include',
+				headers: { Authorization: `Bearer ${auth?.accessToken}` },
+				body: data,
+			}
+		);
 		return await res.json();
 	});
 	function handleSubmit() {
