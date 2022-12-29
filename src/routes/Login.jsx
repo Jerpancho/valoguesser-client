@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import useAuth from '../utils/useAuth';
+import styles from '../css/Login.module.css';
 function Login() {
 	const { auth, setAuth } = useAuth();
 	const userRef = useRef();
@@ -55,20 +56,32 @@ function Login() {
 	};
 	return (
 		<div>
-			<h1>Login</h1>
-			<div className='login'>
-				{location?.state?.registration && (
-					<div>{location?.state?.registration}</div>
-				)}
-				<div>{error}</div>
-				<form onSubmit={handleLogin}>
-					<label htmlFor='username'>username: </label>
+			<h1 className={styles.header}>Login</h1>
+			<section className={styles.message}>
+				<h3 className={styles.notice}>
+					Notice:
+					<span className={styles.message}>
+						We are allowing account creation but uploading rounds are
+						currently for admins only. Verifying users to allow round
+						uploads is currently in development.
+					</span>
+				</h3>
+			</section>
+			<section className={styles.body}>
+				{location?.state?.status && <div>{location?.state?.status}</div>}
+				<div className={styles.error}>{error}</div>
+				<form onSubmit={handleLogin} className={styles.login}>
+					<label htmlFor='username'>Username</label>
 					<input type='text' id='username' name='username' ref={userRef} />
-					<label htmlFor='password'>password: </label>
+					<label htmlFor='password'>Password</label>
 					<input type='text' id='password' name='password' ref={passRef} />
 					<button>login</button>
 				</form>
-			</div>
+				<Link
+					to='/register'
+					className={styles.register}
+				>{`don't have an account? register here.`}</Link>
+			</section>
 		</div>
 	);
 }

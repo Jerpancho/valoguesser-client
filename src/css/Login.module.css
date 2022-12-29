@@ -1,0 +1,60 @@
+
+.body{
+	border-radius: 1.5rem;
+	padding: 1rem 0;
+	margin: 0 auto;
+	width: 35rem;
+	height: 25rem;
+	background-color: rgb(68, 63, 187);
+}
+.notice{ 
+	width: 50%;
+	margin: 0 auto;
+}
+.message{ 
+	padding-left: 0.5rem;
+	font-size: 1rem;
+}
+.header {
+	font-size: 2.75rem;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.error {
+	margin: 1rem 0;
+	text-align: center;
+}
+
+.login {	
+	height: 85%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 0.25rem;
+}
+.login > label{
+	margin-top: 1.75rem;
+	font-size: 1.75rem;
+}
+.login > input {
+	font-size: 1.2rem;
+	margin: 0 auto;
+	width: 20rem;
+}
+.login > button {
+	padding: 0;
+	display: block;
+	margin: auto auto 0 auto;
+	width: 20rem;
+}
+.register{
+	margin-top: 0.25rem;
+	color: white;
+	display: block;
+	text-align: center;
+}
+.register:hover{
+	color: blueviolet;
+}

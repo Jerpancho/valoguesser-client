@@ -27,7 +27,7 @@ function Register() {
 				}
 				if (data?.user) {
 					navigate('/login', {
-						state: { registration: data?.message },
+						state: { status: data?.message },
 					});
 				}
 			},
