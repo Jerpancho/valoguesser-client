@@ -8,7 +8,7 @@ import Logout from '../components/logout';
 function App() {
 	const { auth } = useAuth();
 	const { isLoading, data, isError } = useQuery(['maps'], () => {
-		return fetch('https://valoguesser-server.up.railway.app/maps').then(
+		return fetch('http://localhost:4444/maps').then(
 			(res) => res.json()
 		);
 	});

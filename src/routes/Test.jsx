@@ -8,7 +8,7 @@ const Test = () => {
 		['rounds'],
 		() => {
 			return fetch(
-				`https://valoguesser-server.up.railway.app/rounds/${bind}`
+				`http://localhost:4444/rounds/${bind}`
 			).then((res) => res.json());
 		},
 		{ placeholderData: { data: 'Loading' } }

@@ -41,7 +41,7 @@ const Game = () => {
 		['rounds'],
 		() => {
 			return fetch(
-				`https://valoguesser-server.up.railway.app/rounds/${state.map_uid}`
+				`http://localhost:4444/rounds/${state.map_uid}`
 			)
 				.then((res) => res.json())
 				.then((val) => {
