@@ -55,9 +55,9 @@ function Login() {
 		return null;
 	};
 	return (
-		<div>
+		<section>
 			<h1 className={styles.header}>Login</h1>
-			<section className={styles.message}>
+			<div className={styles.message}>
 				<h3 className={styles.notice}>
 					Notice:
 					<span className={styles.message}>
@@ -66,8 +66,8 @@ function Login() {
 						uploads is currently in development.
 					</span>
 				</h3>
-			</section>
-			<section className={styles.body}>
+			</div>
+			<div className={styles.body}>
 				{location?.state?.status && <div>{location?.state?.status}</div>}
 				<div className={styles.error}>{error}</div>
 				<form onSubmit={handleLogin} className={styles.login}>
@@ -81,8 +81,8 @@ function Login() {
 					to='/register'
 					className={styles.register}
 				>{`don't have an account? register here.`}</Link>
-			</section>
-		</div>
+			</div>
+		</section>
 	);
 }
 

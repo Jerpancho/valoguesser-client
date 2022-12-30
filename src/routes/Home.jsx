@@ -8,9 +8,7 @@ import Logout from '../components/logout';
 function App() {
 	const { auth } = useAuth();
 	const { isLoading, data, isError } = useQuery(['maps'], () => {
-		return fetch('http://localhost:4444/maps').then(
-			(res) => res.json()
-		);
+		return fetch('http://localhost:4444/maps').then((res) => res.json());
 	});
 
 	if (isLoading) return <div>Loading...</div>;
