@@ -90,10 +90,10 @@ const CreateRoundForm = () => {
 						<Logout />
 						<button
 							onClick={() => {
-								navigate('/create/map');
+								navigate('/');
 							}}
 						>
-							create map
+							Home
 						</button>
 					</div>
 

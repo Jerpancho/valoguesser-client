@@ -24,15 +24,14 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='/' element={<Home />} />
 				<Route path='/map/:id' element={<Game />} />
-				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />
 				{/* create login and register routes */}
 				{/* these routes should be protected if you aren't an admin or verified user*/}
 				<Route element={<PersistentLogin />}>
-					{/* if you already have a refresh token then you shouldnt have access to register and login routes */}
-
+					{/* if you already have a refresh token then you shouldnt have access to login routes */}
+					<Route path='/login' element={<Login />} />
+					<Route path='/' element={<Home />} />
 					<Route
 						element={<ProtectedRoute acceptedRoles={[ROLES.Admin]} />}
 					>

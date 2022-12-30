@@ -12,7 +12,7 @@ function Login() {
 	console.log(location);
 	const navigate = useNavigate();
 
-	//LOG OUT if tried to route back to login
+	//redirect if tried to route back to login
 	useEffect(() => {
 		console.log(auth);
 		if (auth?.accessToken) navigate('/');
