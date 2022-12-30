@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import styles from '../css/Register.module.css';
 function Register() {
 	const [errors, setErrors] = useState([]);
 	const [user, setUser] = useState('');
@@ -49,40 +50,45 @@ function Register() {
 		mutate.mutate({ username: userLowerCase, password });
 	};
 	return (
-		<section>
-			<ul>
+		<section className={styles.register}>
+			<h1 className={styles.header}>Register</h1>
+			<div className={styles.errors}>
 				{errors.length > 0
-					? errors.map((val, i) => <li key={i}>{val}</li>)
+					? errors.map((val, i) => <div key={i}>{val}</div>)
 					: null}
-			</ul>
-
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='username'>username:</label>
-				<input
-					type='text'
-					name='username'
-					id='username'
-					value={user}
-					onChange={(e) => setUser(e.target.value)}
-				/>
-				<label htmlFor='password'>password:</label>
-				<input
-					type='text'
-					name='password'
-					id='password'
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<label htmlFor='matchPassword'>type password again:</label>
-				<input
-					type='text'
-					name='matchPassword'
-					id='matchPassword'
-					value={matchPassword}
-					onChange={(e) => setMatchPassword(e.target.value)}
-				/>
-				<button type='submit'>login</button>
-			</form>
+			</div>
+			<div className={styles.container}>
+				<form onSubmit={handleSubmit} className={styles.form}>
+					<label htmlFor='username'>Username</label>
+					<input
+						type='text'
+						name='username'
+						id='username'
+						value={user}
+						onChange={(e) => setUser(e.target.value)}
+					/>
+					<label htmlFor='password'>Password</label>
+					<input
+						type='text'
+						name='password'
+						id='password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<label htmlFor='matchPassword'>Type password again</label>
+					<input
+						type='text'
+						name='matchPassword'
+						id='matchPassword'
+						value={matchPassword}
+						onChange={(e) => setMatchPassword(e.target.value)}
+					/>
+					<button type='submit'>register</button>
+				</form>
+				<Link className={styles.login} to='/login'>
+					already have an account? login here.
+				</Link>
+			</div>
 		</section>
 	);
 }

@@ -4,7 +4,6 @@
 	padding: 1rem 0;
 	margin: 0 auto;
 	width: 35rem;
-	height: 20rem;
 	background-color: rgb(68, 63, 187);
 }
 .header {
@@ -22,6 +21,7 @@
 	font-size: 1rem;
 }
 .error {
+	margin: 1rem auto;
 	text-align: center;
 }
 .login {	
@@ -33,7 +33,7 @@
 }
 .login > label{
 	margin-top: 0.75rem;
-	font-size: 1.75rem;
+	font-size: 1.25rem;
 }
 .login > input {
 	font-size: 1.2rem;
@@ -41,9 +41,10 @@
 	width: 20rem;
 }
 .login > button {
+	font-weight: 100;
 	padding: 0;
 	display: block;
-	margin: auto auto 0 auto;
+	margin: 6.25rem auto 0 auto;
 	width: 20rem;
 }
 .register{
