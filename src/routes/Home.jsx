@@ -17,13 +17,15 @@ function App() {
 	if (data) {
 		return (
 			<div>
-				<div className='navbar'>
-					<Link to='/create/round'>upload a round</Link>
-					{auth?.user && (
+				<div className={styles.navbar}>
+					{auth?.user ? (
 						<div>
+							<Link to='/create/round'>upload a round</Link>
 							<div>{auth.user}</div>
 							<Logout />
 						</div>
+					) : (
+						<Link to='/create/round'>upload a round</Link>
 					)}
 				</div>
 				<div className='App'>

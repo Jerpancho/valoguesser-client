@@ -59,3 +59,14 @@
 	color: #001B3E;
 	background-color: #3ED3A8;
 }
+.navbar{
+	margin: 1.5rem auto 0 auto;
+	width: max(90%, 85rem);
+	display: flex;
+	justify-content: right;
+}
+.navbar > div{
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+}
