@@ -7,8 +7,8 @@ const Test = () => {
 	const { isLoading, data, isError, placeholderData } = useQuery(
 		['rounds'],
 		() => {
-			return fetch(`http://localhost:4444/rounds/${bind}`).then((res) =>
-				res.json()
+			return fetch(`https://valoguesser.netlify.app/rounds/${bind}`).then(
+				(res) => res.json()
 			);
 		},
 		{ placeholderData: { data: 'Loading' } }

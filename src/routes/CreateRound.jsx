@@ -26,12 +26,14 @@ const CreateRoundForm = () => {
 	const { isLoading, data, isError } = useQuery(
 		['maps'],
 		() => {
-			return fetch('http://localhost:4444/maps').then((res) => res.json());
+			return fetch('https://valoguesser.netlify.app/maps').then((res) =>
+				res.json()
+			);
 		},
 		{ refetchOnWindowFocus: false }
 	);
 	const mutation = useMutation((form) =>
-		fetch('http://localhost:4444/rounds', {
+		fetch('https://valoguesser.netlify.app/rounds', {
 			method: 'POST',
 			headers: { Authorization: `Bearer ${auth?.accessToken}` },
 			body: form,

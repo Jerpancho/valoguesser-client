@@ -5,7 +5,7 @@ function useRefresh() {
 
 	const refresh = async () => {
 		try {
-			const result = await fetch('http://localhost:4444/refresh', {
+			const result = await fetch('https://valoguesser.netlify.app/refresh', {
 				credentials: 'include',
 			});
 			const auth = await result.json();

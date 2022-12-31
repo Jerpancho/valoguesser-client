@@ -11,7 +11,7 @@ function Register() {
 
 	const mutate = useMutation(
 		(user) => {
-			return fetch('http://localhost:4444/register', {
+			return fetch('https://valoguesser.netlify.app/register', {
 				method: 'POST',
 				credentials: 'include',
 				headers: { 'Content-Type': 'application/json' },
