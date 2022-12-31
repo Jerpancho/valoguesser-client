@@ -11,7 +11,7 @@ function Register() {
 
 	const mutate = useMutation(
 		(user) => {
-			return fetch('valoguesser-server.up.railway.app/register', {
+			return fetch('https://valoguesser-server.up.railway.app/register', {
 				method: 'POST',
 				credentials: 'include',
 				headers: { 'Content-Type': 'application/json' },

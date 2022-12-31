@@ -26,14 +26,14 @@ const CreateRoundForm = () => {
 	const { isLoading, data, isError } = useQuery(
 		['maps'],
 		() => {
-			return fetch('valoguesser-server.up.railway.app/maps').then((res) =>
-				res.json()
+			return fetch('https://valoguesser-server.up.railway.app/maps').then(
+				(res) => res.json()
 			);
 		},
 		{ refetchOnWindowFocus: false }
 	);
 	const mutation = useMutation((form) =>
-		fetch('valoguesser-server.up.railway.app/rounds', {
+		fetch('https://valoguesser-server.up.railway.app/rounds', {
 			method: 'POST',
 			headers: { Authorization: `Bearer ${auth?.accessToken}` },
 			body: form,
