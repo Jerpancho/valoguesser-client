@@ -11,7 +11,6 @@ function App() {
 	const { isLoading, data, isError } = useQuery(['maps'], () => {
 		return fetch('http://localhost:4444/maps').then((res) => res.json());
 	});
-	console.log(auth);
 	if (isLoading) return <div>Loading...</div>;
 	if (isError) return <div>Error loading page...</div>;
 	if (data) {

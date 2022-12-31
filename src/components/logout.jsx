@@ -1,6 +1,7 @@
 import React from 'react';
 import useLogout from '../utils/useLogout';
 import { useNavigate, useLocation } from 'react-router-dom';
+import styles from '../css/Button.module.css';
 function logout() {
 	const logout = useLogout();
 	const location = useLocation();
@@ -12,6 +13,7 @@ function logout() {
 	};
 	return (
 		<button
+			className={styles.button}
 			onClick={() => {
 				handleLogout();
 			}}

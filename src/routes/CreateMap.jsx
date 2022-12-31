@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styles from '../css/MapForm.module.css';
+import buttonStyle from '../css/Button.module.css';
 import Logout from '../components/logout';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -54,14 +55,23 @@ function CreateMap() {
 	// add thumbnail
 	return (
 		<div className={styles.form}>
-			<div>
+			<div className={styles.mapNav}>
 				<Logout />
 				<button
+					className={buttonStyle.button}
 					onClick={() => {
 						navigate('/create/round');
 					}}
 				>
 					create round
+				</button>
+				<button
+					className={buttonStyle.button}
+					onClick={() => {
+						navigate('/');
+					}}
+				>
+					home
 				</button>
 			</div>
 

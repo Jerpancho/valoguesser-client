@@ -5,7 +5,7 @@
 	red: #ef404f
 */
 .form{
-	margin: 0 auto;
+	margin: 1rem auto;
 	width: min(85rem, 90%);
 	height: 65vh;
 	background-color: #152230;
@@ -42,4 +42,9 @@
 	font-weight: 300;
 	display: block;
 	width: 5em;
+}
+.mapNav{
+	display: flex;
+	justify-content: end;
+	gap: 1rem;
 }

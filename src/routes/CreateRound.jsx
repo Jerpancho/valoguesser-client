@@ -6,6 +6,7 @@ import Logout from '../components/logout';
 import { useNavigate } from 'react-router-dom';
 import { reducer } from '../utils/reducer';
 import useAuth from '../utils/useAuth';
+import buttonStyle from '../css/Button.module.css';
 const defaultState = {
 	roundNumber: 0,
 	coords: { lat: 0, lng: 0 },
@@ -86,15 +87,16 @@ const CreateRoundForm = () => {
 				<div>error loading data</div>
 			) : (
 				<div className={styles.container}>
-					<div>
-						<Logout />
+					<div className={styles.navbar}>
 						<button
+							className={buttonStyle.button}
 							onClick={() => {
 								navigate('/');
 							}}
 						>
 							Home
 						</button>
+						<Logout />
 					</div>
 
 					<form className={styles.form}>

@@ -9,18 +9,17 @@ function Login() {
 	const passRef = useRef();
 	const [error, setError] = useState('');
 	const location = useLocation();
-	console.log(location);
 	const navigate = useNavigate();
 
 	//redirect if tried to route back to login
 	useEffect(() => {
-		console.log(auth);
+		// console.log(auth);
 		if (auth?.accessToken) navigate('/');
 	}, []);
 
 	const mutation = useMutation(
 		(data) => {
-			console.log(JSON.stringify(data));
+			// console.log(JSON.stringify(data));
 			return fetch('http://localhost:4444/login', {
 				method: 'POST',
 				credentials: 'include',
@@ -32,8 +31,8 @@ function Login() {
 		},
 		{
 			onSuccess: (data) => {
-				console.log(data);
-				console.log(location);
+				// console.log(data);
+				// console.log(location);
 				setAuth(data);
 				navigate(location?.state?.from || '/');
 			},
