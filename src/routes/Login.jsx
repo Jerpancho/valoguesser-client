@@ -20,7 +20,7 @@ function Login() {
 	const mutation = useMutation(
 		(data) => {
 			// console.log(JSON.stringify(data));
-			return fetch('https://valoguesser.netlify.app/login', {
+			return fetch('valoguesser-server.up.railway.app/login', {
 				method: 'POST',
 				credentials: 'include',
 				headers: {

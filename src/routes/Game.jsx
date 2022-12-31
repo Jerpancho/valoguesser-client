@@ -40,7 +40,7 @@ const Game = () => {
 	const { isLoading, data, isError } = useQuery(
 		['rounds'],
 		() => {
-			return fetch(`https://valoguesser.netlify.app/rounds/${state.map_uid}`)
+			return fetch(`valoguesser-server.up.railway.app/rounds/${state.map_uid}`)
 				.then((res) => res.json())
 				.then((val) => {
 					if (val.status === 'ok') {

@@ -5,7 +5,7 @@ const useLogout = () => {
 	const logout = async () => {
 		setAuth({});
 		try {
-			await fetch('https://valoguesser.netlify.app/logout', {
+			await fetch('valoguesser-server.up.railway.app/logout', {
 				method: 'DELETE',
 				credentials: 'include',
 			});

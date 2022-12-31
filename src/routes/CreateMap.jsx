@@ -15,7 +15,7 @@ function CreateMap() {
 	const navigate = useNavigate();
 	// console.log(auth);
 	const { isError, isLoading, data, mutate } = useMutation(async (data) => {
-		const res = await fetch('https://valoguesser.netlify.app/maps/', {
+		const res = await fetch('valoguesser-server.up.railway.app/maps/', {
 			method: 'POST',
 			credentials: 'include',
 			headers: { Authorization: `Bearer ${auth?.accessToken}` },

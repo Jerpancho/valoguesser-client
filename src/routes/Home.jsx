@@ -9,7 +9,7 @@ import Logout from '../components/logout';
 function App() {
 	const { auth } = useAuth();
 	const { isLoading, data, isError } = useQuery(['maps'], () => {
-		return fetch('https://valoguesser.netlify.app/maps').then((res) =>
+		return fetch('valoguesser-server.up.railway.app/maps').then((res) =>
 			res.json()
 		);
 	});
