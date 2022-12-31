@@ -20,7 +20,7 @@ function Login() {
 	const mutation = useMutation(
 		(data) => {
 			// console.log(JSON.stringify(data));
-			return fetch('https://valoguesser-server.up.railway.app/login', {
+			return fetch('http://localhost:4444/login', {
 				method: 'POST',
 				credentials: 'include',
 				headers: {

@@ -26,14 +26,12 @@ const CreateRoundForm = () => {
 	const { isLoading, data, isError } = useQuery(
 		['maps'],
 		() => {
-			return fetch('https://valoguesser-server.up.railway.app/maps').then(
-				(res) => res.json()
-			);
+			return fetch('http://localhost:4444/maps').then((res) => res.json());
 		},
 		{ refetchOnWindowFocus: false }
 	);
 	const mutation = useMutation((form) =>
-		fetch('https://valoguesser-server.up.railway.app/rounds', {
+		fetch('http://localhost:4444/rounds', {
 			method: 'POST',
 			headers: { Authorization: `Bearer ${auth?.accessToken}` },
 			body: form,
@@ -102,7 +100,7 @@ const CreateRoundForm = () => {
 					</div>
 
 					<form className={styles.form}>
-						<label htmlFor='map-select'>select map: </label>
+						<label htmlFor='map-select'>Select map</label>
 						<select
 							name='map-select'
 							id='map-select'
@@ -126,7 +124,7 @@ const CreateRoundForm = () => {
 							/>
 						)}
 						<br />
-						<label htmlFor='guess-image'>upload guessing image: </label>
+						<label htmlFor='guess-image'>Upload guessing image</label>
 						<input
 							type='file'
 							id='guess-image'
@@ -138,7 +136,7 @@ const CreateRoundForm = () => {
 							required
 						/>
 						<br />
-						<label htmlFor='answer-image'>upload answer image: </label>
+						<label htmlFor='answer-image'>Upload answer image</label>
 						<input
 							type='file'
 							id='answer-image'
@@ -150,6 +148,7 @@ const CreateRoundForm = () => {
 							required
 						/>
 						<br />
+						<label htmlFor='difficulty'>Difficulty</label>
 						<select
 							name='difficulty'
 							id='difficulty'
@@ -158,15 +157,22 @@ const CreateRoundForm = () => {
 							<option value='normal'>normal</option>
 							<option value='hard'>hard</option>
 						</select>
+						<button
+							className={styles.submit}
+							type='submit'
+							onClick={handleSubmitForm}
+						>
+							submit
+						</button>
 					</form>
 					<div className={styles.confirmation}>
 						{mutation.isLoading ? (
 							<div>loading...</div>
 						) : mutation.isError ? (
 							<div>error handling request</div>
-						) : (
+						) : mutation.data ? (
 							<div>success</div>
-						)}
+						) : null}
 						<h1>confirmation form</h1>
 						{selectedMap !== 'N/A' && (
 							<>
@@ -188,14 +194,6 @@ const CreateRoundForm = () => {
 						</p>
 						<p>selected difficulty: {difficulty}</p>
 					</div>
-
-					<button
-						className={styles.submit}
-						type='submit'
-						onClick={handleSubmitForm}
-					>
-						submit
-					</button>
 				</div>
 			)}
 		</>

@@ -7,7 +7,7 @@ const Test = () => {
 	const { isLoading, data, isError, placeholderData } = useQuery(
 		['rounds'],
 		() => {
-			return fetch(`https://valoguesser-server.up.railway.app/rounds/${bind}`).then(
+			return fetch(`http://localhost:4444/rounds/${bind}`).then(
 				(res) => res.json()
 			);
 		},

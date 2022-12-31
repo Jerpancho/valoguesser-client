@@ -5,7 +5,7 @@ function useRefresh() {
 
 	const refresh = async () => {
 		try {
-			const result = await fetch('https://valoguesser-server.up.railway.app/refresh', {
+			const result = await fetch('http://localhost:4444/refresh', {
 				credentials: 'include',
 			});
 			const auth = await result.json();
