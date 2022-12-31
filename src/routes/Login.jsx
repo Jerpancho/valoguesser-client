@@ -73,7 +73,12 @@ function Login() {
 					<label htmlFor='username'>Username</label>
 					<input type='text' id='username' name='username' ref={userRef} />
 					<label htmlFor='password'>Password</label>
-					<input type='text' id='password' name='password' ref={passRef} />
+					<input
+						type='password'
+						id='password'
+						name='password'
+						ref={passRef}
+					/>
 					<button>login</button>
 				</form>
 				<Link

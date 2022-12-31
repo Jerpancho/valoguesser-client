@@ -69,7 +69,7 @@ function Register() {
 					/>
 					<label htmlFor='password'>Password</label>
 					<input
-						type='text'
+						type='password'
 						name='password'
 						id='password'
 						value={password}
@@ -77,7 +77,7 @@ function Register() {
 					/>
 					<label htmlFor='matchPassword'>Type password again</label>
 					<input
-						type='text'
+						type='password'
 						name='matchPassword'
 						id='matchPassword'
 						value={matchPassword}
