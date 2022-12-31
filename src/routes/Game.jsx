@@ -40,9 +40,7 @@ const Game = () => {
 	const { isLoading, data, isError } = useQuery(
 		['rounds'],
 		() => {
-			return fetch(
-				`http://localhost:4444/rounds/${state.map_uid}`
-			)
+			return fetch(`http://localhost:4444/rounds/${state.map_uid}`)
 				.then((res) => res.json())
 				.then((val) => {
 					if (val.status === 'ok') {
