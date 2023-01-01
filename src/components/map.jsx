@@ -43,7 +43,6 @@ function Map({
 			'https://res.cloudinary.com/dna7c2j1e/image/upload/v1670521081/assets/answer-filled_m3kfp7.png',
 		iconSize: [30, 30],
 	});
-
 	return (
 		<MapContainer
 			id='map-container'
@@ -56,7 +55,12 @@ function Map({
 			zoomControl={false}
 			whenReady={() => setMapResize(mapRef)}
 		>
-			<ImageOverlay url={mapData.base_img} bounds={bounds} />
+			<ImageOverlay
+				url={
+					gameState.roundConfirmed ? mapData.callout_img : mapData.base_img
+				}
+				bounds={bounds}
+			/>
 			{gameState.gameOver ? (
 				<>
 					{rounds.map((val, index) => {

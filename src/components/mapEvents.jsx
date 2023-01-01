@@ -4,7 +4,8 @@ function MapEvents({ dispatch, gameState }) {
 	useMapEvents({
 		click: (e) => {
 			if (gameState.roundConfirmed === false) {
-				console.log(e.latlng);
+				console.log(gameState);
+				// console.log(e.latlng);
 				dispatch({ type: 'UPDATE_COORDS', coords: e.latlng });
 			}
 		},
