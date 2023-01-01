@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useRef } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import styles from '../css/RoundForm.module.css';
 import Map from '../components/map';
@@ -18,9 +18,12 @@ const CreateRoundForm = () => {
 	const [selectedMap, setSelectedMap] = useState('N/A');
 	const [difficulty, setDifficulty] = useState('normal');
 	const [guessImage, setGuessImage] = useState(null);
+	const guessImageRef = useRef();
 	const [answerImage, setAnswerImage] = useState(null);
+	const answerImageRef = useRef();
 	const [gameState, dispatch] = useReducer(reducer, defaultState);
-
+	console.log(guessImageRef);
+	console.log(answerImageRef);
 	const { auth } = useAuth();
 	const navigate = useNavigate();
 	const { isLoading, data, isError } = useQuery(
@@ -75,7 +78,12 @@ const CreateRoundForm = () => {
 			form.append('difficulty', difficulty);
 
 			// submit a request and send data to server
+
 			mutation.mutate(form);
+			guessImageRef.current.value = '';
+			answerImageRef.current.value = '';
+			setGuessImage(null);
+			setAnswerImage(null);
 			// console.log(form);
 		} else {
 			alert('missing required inputs');
@@ -128,6 +136,7 @@ const CreateRoundForm = () => {
 						<br />
 						<label htmlFor='guess-image'>Upload guessing image</label>
 						<input
+							ref={guessImageRef}
 							type='file'
 							id='guess-image'
 							name='guess-image'
@@ -140,6 +149,7 @@ const CreateRoundForm = () => {
 						<br />
 						<label htmlFor='answer-image'>Upload answer image</label>
 						<input
+							ref={answerImageRef}
 							type='file'
 							id='answer-image'
 							name='answer-image'
@@ -191,7 +201,7 @@ const CreateRoundForm = () => {
 							guess image: <span>{guessImage && guessImage.name}</span>
 						</p>
 						<p>
-							answer image:{' '}
+							answer image:
 							<span>{answerImage && answerImage.name}</span>
 						</p>
 						<p>selected difficulty: {difficulty}</p>
