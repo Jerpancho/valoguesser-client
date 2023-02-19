@@ -27,7 +27,7 @@ const useTimer = (onDone, timeInSeconds) => {
 
 	const restart = () => {
 		if (interval.current) {
-			clearInterval(interval);
+			clearInterval(interval.current);
 		}
 		setTimer(timeInSeconds);
 		countDown();
